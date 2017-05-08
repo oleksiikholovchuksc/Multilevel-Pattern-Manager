@@ -13,10 +13,7 @@ LeafNode::LeafNode(DataType value)
 bool LeafNode::isEqual(const IExpression* other) const 
 {
     auto asLeaf = dynamic_cast<const LeafNode*>(other);
-    if(asLeaf && asLeaf->getValue() == mValue)
-        return true;
-
-    return false;
+    return asLeaf && asLeaf->getValue() == mValue;
 }
 
 LeafNode::DataType LeafNode::getValue() const
