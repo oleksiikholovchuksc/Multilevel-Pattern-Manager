@@ -1,12 +1,14 @@
 #include "LeafNode.hpp"
 
+#include <iostream>
+
 int main()
 {
     MPM::Model::IExpression* expr = new MPM::Model::SimpleExpression;
     (void)expr;
 
-    MPM::Model::IExpression* leaf = new MPM::Model::LeafNode('c');
-    (void)leaf;
+    auto leaf = std::make_shared<MPM::Model::LeafNode>('c');
+    std::cout << "Leaf value: " << leaf->getValue();
 
     return 0;
 }
