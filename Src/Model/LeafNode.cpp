@@ -21,5 +21,9 @@ LeafNode::DataType LeafNode::getValue() const
     return mValue;
 }
 
+std::shared_ptr<IExpression> LeafNode::clone() const {
+    return std::make_shared<LeafNode>(mValue);
+}
+
 }
 }

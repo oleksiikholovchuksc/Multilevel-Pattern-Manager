@@ -11,8 +11,10 @@ public:
     using DataType = char;
 
     LeafNode(DataType data);
-    bool isEqual(const IExpression* other) const override;
     DataType getValue() const;
+
+    bool isEqual(const IExpression* other) const override;
+    std::shared_ptr<IExpression> clone() const override;
 
 private:
     DataType mValue;    

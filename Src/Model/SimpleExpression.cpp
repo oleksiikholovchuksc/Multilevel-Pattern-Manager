@@ -4,7 +4,7 @@
 namespace MPM {
 namespace Model {
 
-SimpleExpression::SimpleExpression(const std::vector<std::shared_ptr<SimpleExpression>>& structure)
+SimpleExpression::SimpleExpression(const std::vector<std::shared_ptr<IExpression>>& structure)
     : mStructure(structure)
 {
 
@@ -16,6 +16,16 @@ bool SimpleExpression::isEqual(const IExpression* other) const
     if(!asSimpleExpr)
         return false;
 
+    auto structure = asSimpleExpr->getStructure();
+    if(structure.size() != mStructure.size())
+        return false;
+
+    for(int i = 0; i < mStructure.size(); ++i)
+    {
+        if(!structure[i]->isEqual(mStructure[i].get()))
+            return false;
+    }
+
     return true;
 }
 
@@ -24,9 +34,20 @@ std::vector<const IExpression*> SimpleExpression::getOperands() const
     return { this };
 }
 
-const std::vector<std::shared_ptr<SimpleExpression>>& SimpleExpression::getStructure() const
+const std::vector<std::shared_ptr<IExpression>>& SimpleExpression::getStructure() const
 {
     return mStructure;
+}
+
+std::shared_ptr<IExpression> SimpleExpression::clone() const {
+    std::vector<std::shared_ptr<IExpression>> cloneStructure;
+    for(const auto& structureItem : mStructure)
+    {
+        auto expressionClone = std::dynamic_pointer_cast<IExpression>(structureItem->clone());
+        cloneStructure.push_back(expressionClone);
+    }
+
+    return std::make_shared<SimpleExpression>(cloneStructure);
 }
 
 }
