@@ -20,7 +20,7 @@ bool SimpleExpression::isEqual(const IExpression* other) const
     if(structure.size() != mStructure.size())
         return false;
 
-    for(int i = 0; i < mStructure.size(); ++i)
+    for(size_t i = 0; i < mStructure.size(); ++i)
     {
         if(!structure[i]->isEqual(mStructure[i].get()))
             return false;

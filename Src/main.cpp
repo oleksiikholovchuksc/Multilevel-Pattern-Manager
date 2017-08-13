@@ -1,15 +1,21 @@
-#include <iostream>
+#include "Src/UI/MainWindow.h"
+#include "Src/Tests/MinimizationTest.hpp"
+#include "Src/Tests/SplicingTest.hpp"
+#include <QApplication>
+#include <QDebug>
 
-#include "Tests/MinimizationTest.hpp"
-#include "Tests/SplicingTest.hpp"
-
-int main()
+int main(int argc, char *argv[])
 {
-    MPM::Testing::SplicingTest t1;
-    std::cout << "Splicing test: " << t1.exec() << std::endl;
+    QApplication a(argc, argv);
 
-    MPM::Testing::MinimizationTest t2;
-    std::cout << "Minimization test: " << t2.exec() << std::endl;
+    MPM::Testing::MinimizationTest mt;
+    MPM::Testing::SplicingTest st;
 
-    return 0;
+    qDebug() << "Minimization test succeeded:" << mt.exec();
+    qDebug() << "Splicing test succeeded:" << st.exec();
+
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }
