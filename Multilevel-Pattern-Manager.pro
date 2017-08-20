@@ -15,23 +15,29 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+INCLUDEPATH += Src/
+
 SOURCES += \
     Src/main.cpp \
     Src/UI/MainWindow.cpp \
-    Src/Model/BinaryExpression.cpp \
-    Src/Model/LeafNode.cpp \
-    Src/Model/SimpleExpression.cpp \
-    Src/Processors/PatternProcessor.cpp
+    Src/Backend/Model/BinaryExpression.cpp \
+    Src/Backend/Model/LeafNode.cpp \
+    Src/Backend/Model/SimpleExpression.cpp \
+    Src/Backend/Processors/PatternProcessor.cpp \
+    Src/Backend/BackendLayer.cpp \
+    Src/Application.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
-    Src/Model/BinaryExpression.h \
-    Src/Model/IExpression.hpp \
-    Src/Model/LeafNode.hpp \
-    Src/Model/SimpleExpression.hpp \
-    Src/Processors/PatternProcessor.hpp \
+    Src/Backend/Model/BinaryExpression.h \
+    Src/Backend/Model/IExpression.hpp \
+    Src/Backend/Model/LeafNode.hpp \
+    Src/Backend/Model/SimpleExpression.hpp \
+    Src/Backend/Processors/PatternProcessor.hpp \
     Src/Tests/ITest.h \
     Src/Tests/MinimizationTest.hpp \
-    Src/Tests/SplicingTest.hpp
+    Src/Tests/SplicingTest.hpp \
+    Src/Backend/BackendLayer.h \
+    Src/Application.h
 
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Model/LeafNode.hpp"
-#include "../Model/SimpleExpression.hpp"
-#include "../Model/BinaryExpression.h"
-#include "../Processors/PatternProcessor.hpp"
+#include "Backend/Model/LeafNode.hpp"
+#include "Backend/Model/SimpleExpression.hpp"
+#include "Backend/Model/BinaryExpression.h"
+#include "Backend/Processors/PatternProcessor.hpp"
 #include "ITest.h"
 
 namespace MPM {
