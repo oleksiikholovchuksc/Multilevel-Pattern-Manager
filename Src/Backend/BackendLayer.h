@@ -9,11 +9,13 @@ namespace Backend {
 
 class BackendLayer : public QThread
 {
+    Q_OBJECT
+
 public:
     BackendLayer();
 
 public slots:
-    void addObject(int parentId);
+    void addObject(size_t parentId);
 
 private slots:
     void init();

@@ -7,6 +7,8 @@ class QPushButton;
 
 namespace MPM {
 
+class ViewWidget;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -15,12 +17,13 @@ public:
     MainWindow(QWidget *parent = 0);
 
 signals:
-    void addObjectRequest(int parentId);
+    void addObjectRequest(size_t parentId);
 
 private:
     void createToolbar();
 
     QPushButton* mAddObjectButton;
+    ViewWidget *mViewWidget;
 };
 
 }

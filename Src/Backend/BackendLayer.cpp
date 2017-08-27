@@ -8,12 +8,13 @@ namespace Backend {
 BackendLayer::BackendLayer()
 {
     moveToThread(this);
+
     connect(this, &BackendLayer::started, this, &BackendLayer::init);
 }
 
-void BackendLayer::addObject(int parentId)
+void BackendLayer::addObject(size_t)
 {
-    qDebug() << QThread::currentThreadId() << " parent id " << parentId;
+
 }
 
 void BackendLayer::init()

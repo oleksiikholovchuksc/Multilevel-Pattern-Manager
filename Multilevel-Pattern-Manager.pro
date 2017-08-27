@@ -25,7 +25,12 @@ SOURCES += \
     Src/Backend/Model/SimpleExpression.cpp \
     Src/Backend/Processors/PatternProcessor.cpp \
     Src/Backend/BackendLayer.cpp \
-    Src/Application.cpp
+    Src/Application.cpp \
+    Src/UI/ViewWidget.cpp \
+    Src/UI/TreeView.cpp \
+    Src/UI/GraphicsView.cpp \
+    Src/UI/InspectorView.cpp \
+    Src/UI/MainToolbar.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
@@ -38,6 +43,11 @@ HEADERS += \
     Src/Tests/MinimizationTest.hpp \
     Src/Tests/SplicingTest.hpp \
     Src/Backend/BackendLayer.h \
-    Src/Application.h
+    Src/Application.h \
+    Src/UI/ViewWidget.h \
+    Src/UI/TreeView.h \
+    Src/UI/GraphicsView.h \
+    Src/UI/InspectorView.h \
+    Src/UI/MainToolbar.h
 
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror

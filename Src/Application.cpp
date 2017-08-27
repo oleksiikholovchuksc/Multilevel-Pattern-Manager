@@ -9,7 +9,7 @@ Application::Application(int argc, char** argv)
     , mMainWindow(new MainWindow())
     , mBackendLayer(new Backend::BackendLayer())
 {
-
+    qRegisterMetaType<size_t>("size_t");
 }
 
 void Application::connectLayers()
