@@ -1,5 +1,6 @@
 #include "BackendLayer.h"
 
+#include "ProjectContext.h"
 #include <QDebug>
 
 namespace MPM {

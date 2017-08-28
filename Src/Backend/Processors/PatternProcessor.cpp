@@ -5,7 +5,7 @@ namespace Processor {
 
 static std::shared_ptr<Model::SimpleExpression> addDummyParent(std::shared_ptr<Model::BinaryExpression> expr) {
     std::vector<std::shared_ptr<Model::IExpression>> exprVec {expr->clone()};
-    return std::make_shared<Model::SimpleExpression>(exprVec);
+    return std::make_shared<Model::SimpleExpression>("Dummy", exprVec);
 }
 
 std::shared_ptr<Model::BinaryExpression> splice(
@@ -49,7 +49,7 @@ std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryE
         structure.push_back(newItem);
     }
 
-    return std::make_shared<Model::SimpleExpression>(structure);
+    return std::make_shared<Model::SimpleExpression>("minimized", structure);
 }
 
 }

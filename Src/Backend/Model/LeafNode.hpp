@@ -15,6 +15,7 @@ public:
 
     bool isEqual(const IExpression* other) const override;
     std::shared_ptr<IExpression> clone() const override;
+    std::string getName() const override;
 
 private:
     DataType mValue;    

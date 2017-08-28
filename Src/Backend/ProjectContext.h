@@ -14,7 +14,7 @@ public:
     ProjectContext();
     
 public slots:
-    void addPattern(const QSttringList& sequence);
+    void addPattern(const QStringList& sequence);
 };
 
 }

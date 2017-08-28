@@ -33,5 +33,10 @@ std::shared_ptr<IExpression> BinaryExpression::clone() const {
     return std::make_shared<BinaryExpression>(mLeft->clone(), mRight->clone());
 }
 
+std::string BinaryExpression::getName() const
+{
+    return mLeft->getName() + " | " + mRight->getName();
+}
+
 }
 }

@@ -8,7 +8,7 @@ ProjectContext::ProjectContext()
 
 }
 
-void ProjectContext::addPattern(const QSttringList &sequence)
+void ProjectContext::addPattern(const QStringList &sequence)
 {
     (void)sequence;
 }

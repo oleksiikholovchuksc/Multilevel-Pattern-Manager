@@ -33,7 +33,8 @@ SOURCES += \
     Src/UI/MainToolbar.cpp \
     Src/Backend/ProjectContext.cpp \
     Src/UI/NewPatternDialog.cpp \
-    Src/Backend/PatternFactory.cpp
+    Src/Backend/PatternFactory.cpp \
+    Src/Utils.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
@@ -54,6 +55,7 @@ HEADERS += \
     Src/UI/MainToolbar.h \
     Src/Backend/ProjectContext.h \
     Src/UI/NewPatternDialog.h \
-    Src/Backend/PatternFactory.h
+    Src/Backend/PatternFactory.h \
+    Src/Utils.h
 
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror

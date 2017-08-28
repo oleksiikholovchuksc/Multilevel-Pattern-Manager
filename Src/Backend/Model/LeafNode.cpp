@@ -1,11 +1,13 @@
 #include "LeafNode.hpp"
 
+#include "Utils.h"
 
 namespace MPM {
 namespace Model {
 
 LeafNode::LeafNode(DataType value)
-    : mValue(value)
+    : SimpleExpression(Utils::charToString(value))
+    , mValue(value)
 {
 
 }
@@ -23,6 +25,11 @@ LeafNode::DataType LeafNode::getValue() const
 
 std::shared_ptr<IExpression> LeafNode::clone() const {
     return std::make_shared<LeafNode>(mValue);
+}
+
+std::string LeafNode::getName() const
+{
+    return Utils::charToString(getValue());
 }
 
 }

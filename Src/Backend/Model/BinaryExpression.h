@@ -12,6 +12,7 @@ public:
     bool isEqual(const IExpression* other) const override;
     std::vector<const IExpression*> getOperands() const override;
     std::shared_ptr<IExpression> clone() const override;
+    std::string getName() const override;
 
 private:
     std::shared_ptr<IExpression> mLeft;
