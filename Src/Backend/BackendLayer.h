@@ -7,6 +7,8 @@
 namespace MPM {
 namespace Backend {
 
+class ProjectContext;
+
 class BackendLayer : public QThread
 {
     Q_OBJECT
@@ -15,10 +17,13 @@ public:
     BackendLayer();
 
 public slots:
-    void addObject(size_t parentId);
+    void addPattern(const QStringList& sequence);
 
 private slots:
     void init();
+
+private:
+    std::shared_ptr<ProjectContext> mContext;
 };
 
 }

@@ -14,7 +14,7 @@ Application::Application(int argc, char** argv)
 
 void Application::connectLayers()
 {
-    connect(mMainWindow, &MainWindow::addObjectRequest, mBackendLayer, &Backend::BackendLayer::addObject);
+    connect(mMainWindow, &MainWindow::addPatternRequest, mBackendLayer, &Backend::BackendLayer::addPattern);
 }
 
 int Application::exec()

@@ -27,8 +27,7 @@ void MainWindow::createToolbar()
 {
     MainToolbar *toolbar = new MainToolbar();
     addToolBar(Qt::TopToolBarArea, toolbar);
-    connect(toolbar, &MainToolbar::addObjectRequested,
-            [this]() { emit addObjectRequest(mViewWidget->getSelectedId()); });
+    connect(toolbar, &MainToolbar::addPatternRequested, this, &MainWindow::addPatternRequest);
 }
 
 }

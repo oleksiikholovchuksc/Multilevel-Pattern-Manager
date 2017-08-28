@@ -11,6 +11,7 @@ public:
     virtual bool isEqual(const IExpression* other) const = 0;
     virtual std::vector<const IExpression*> getOperands() const = 0;
     virtual std::shared_ptr<IExpression> clone() const = 0;
+//    virtual void addOperand(std::shared_ptr<IExpression> operand) = 0;
 };
 
 }

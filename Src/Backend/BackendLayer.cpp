@@ -12,14 +12,14 @@ BackendLayer::BackendLayer()
     connect(this, &BackendLayer::started, this, &BackendLayer::init);
 }
 
-void BackendLayer::addObject(size_t)
+void BackendLayer::addPattern(const QStringList &sequence)
 {
-
+    mContext->addPattern(sequence);
 }
 
 void BackendLayer::init()
 {
-
+    mContext = std::make_shared<ProjectContext>();
 }
 
 }

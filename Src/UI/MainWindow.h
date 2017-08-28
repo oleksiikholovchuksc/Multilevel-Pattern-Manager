@@ -17,7 +17,7 @@ public:
     MainWindow(QWidget *parent = 0);
 
 signals:
-    void addObjectRequest(size_t parentId);
+    void addPatternRequest(const QStringList& sequence);
 
 private:
     void createToolbar();

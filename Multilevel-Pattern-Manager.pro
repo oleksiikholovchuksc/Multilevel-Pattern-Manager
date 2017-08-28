@@ -30,7 +30,10 @@ SOURCES += \
     Src/UI/TreeView.cpp \
     Src/UI/GraphicsView.cpp \
     Src/UI/InspectorView.cpp \
-    Src/UI/MainToolbar.cpp
+    Src/UI/MainToolbar.cpp \
+    Src/Backend/ProjectContext.cpp \
+    Src/UI/NewPatternDialog.cpp \
+    Src/Backend/PatternFactory.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
@@ -48,6 +51,9 @@ HEADERS += \
     Src/UI/TreeView.h \
     Src/UI/GraphicsView.h \
     Src/UI/InspectorView.h \
-    Src/UI/MainToolbar.h
+    Src/UI/MainToolbar.h \
+    Src/Backend/ProjectContext.h \
+    Src/UI/NewPatternDialog.h \
+    Src/Backend/PatternFactory.h
 
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror
