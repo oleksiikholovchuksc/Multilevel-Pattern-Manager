@@ -2,7 +2,7 @@
 #define BACKENDLAYER_H
 
 #include <QThread>
-
+#include <memory>
 
 namespace MPM {
 namespace Backend {

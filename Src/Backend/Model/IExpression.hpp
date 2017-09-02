@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 namespace MPM {
 namespace Model {
@@ -9,6 +10,8 @@ namespace Model {
 class IExpression 
 {
 public:
+    virtual ~IExpression() {}
+
     size_t getID() const { return reinterpret_cast<size_t>(this); }
 
     virtual bool isEqual(const IExpression* other) const = 0;

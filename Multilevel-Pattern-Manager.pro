@@ -58,4 +58,6 @@ HEADERS += \
     Src/Backend/PatternFactory.h \
     Src/Utils.h
 
-QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror
+mac {
+    QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror
+}
