@@ -10,6 +10,8 @@ namespace Model {
 class IExpression 
 {
 public:
+    static constexpr size_t INVALID_ID = std::numeric_limits<size_t>::max();
+
     virtual ~IExpression() {}
 
     size_t getID() const { return reinterpret_cast<size_t>(this); }

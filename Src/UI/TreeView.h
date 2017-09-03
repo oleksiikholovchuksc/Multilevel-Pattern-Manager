@@ -1,6 +1,7 @@
 #ifndef TREEVIEW_H
 #define TREEVIEW_H
 
+#include "Common/PatternTree.h"
 #include <QTreeWidget>
 
 namespace MPM {
@@ -11,7 +12,7 @@ class TreeView : public QTreeWidget
 public:
     TreeView();
 
-//private:
+    void addPattern(size_t parentId, const PatternTree& ptree);
 };
 }
 

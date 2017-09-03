@@ -34,7 +34,10 @@ SOURCES += \
     Src/Backend/ProjectContext.cpp \
     Src/UI/NewPatternDialog.cpp \
     Src/Backend/PatternFactory.cpp \
-    Src/Utils.cpp
+    Src/Utils.cpp \
+    Src/Common/PatternTree.cpp \
+    Src/Backend/BackUtilsUtils.cpp \
+    Src/UI/TreeWidgetItem.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
@@ -56,7 +59,10 @@ HEADERS += \
     Src/Backend/ProjectContext.h \
     Src/UI/NewPatternDialog.h \
     Src/Backend/PatternFactory.h \
-    Src/Utils.h
+    Src/Utils.h \
+    Src/Common/PatternTree.h \
+    Src/Backend/BackUtilsUtils.h \
+    Src/UI/TreeWidgetItem.h
 
 mac {
     QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror

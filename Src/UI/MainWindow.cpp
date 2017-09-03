@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(mViewWidget);
 }
 
+void MainWindow::addPattern(size_t parentId, const PatternTree &ptree)
+{
+    mViewWidget->addPattern(parentId, ptree);
+}
+
 void MainWindow::createToolbar()
 {
     MainToolbar *toolbar = new MainToolbar();

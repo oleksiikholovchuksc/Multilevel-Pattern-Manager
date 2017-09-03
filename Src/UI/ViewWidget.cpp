@@ -18,7 +18,14 @@ ViewWidget::ViewWidget()
 
 size_t ViewWidget::getSelectedId() const
 {
+    // NIY
+
     return 123;
+}
+
+void ViewWidget::addPattern(size_t parentId, const PatternTree &ptree)
+{
+    mTreeView->addPattern(parentId, ptree);
 }
 
 void ViewWidget::arrangeWidgets()

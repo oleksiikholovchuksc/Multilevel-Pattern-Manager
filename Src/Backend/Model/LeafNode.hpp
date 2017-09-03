@@ -8,7 +8,7 @@ namespace Model {
 class LeafNode : public SimpleExpression
 {
 public:
-    using DataType = char;
+    using DataType = std::string;
 
     LeafNode(DataType data);
     DataType getValue() const;

@@ -1,6 +1,7 @@
 #ifndef VIEWWIDGET_H
 #define VIEWWIDGET_H
 
+#include "Common/PatternTree.h"
 #include <QWidget>
 
 namespace MPM {
@@ -17,6 +18,8 @@ public:
     ViewWidget();
 
     size_t getSelectedId() const;
+
+    void addPattern(size_t parentId, const PatternTree& ptree);
 
 private:
     void arrangeWidgets();

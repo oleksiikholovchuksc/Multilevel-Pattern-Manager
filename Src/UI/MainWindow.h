@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "Common/PatternTree.h"
 #include <QMainWindow>
 
 class QPushButton;
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
+
+public slots:
+    void addPattern(size_t parentId, const PatternTree& ptree);
 
 signals:
     void addPatternRequest(const QStringList& sequence);

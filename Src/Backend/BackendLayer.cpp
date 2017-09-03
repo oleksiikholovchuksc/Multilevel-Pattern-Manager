@@ -21,6 +21,7 @@ void BackendLayer::addPattern(const QStringList &sequence)
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();
+    connect(mContext.get(), &ProjectContext::patternAdded, this, &BackendLayer::patternAdded);
 }
 
 }

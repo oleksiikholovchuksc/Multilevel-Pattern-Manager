@@ -1,6 +1,7 @@
 #ifndef BACKENDLAYER_H
 #define BACKENDLAYER_H
 
+#include "Common/PatternTree.h"
 #include <QThread>
 #include <memory>
 
@@ -15,6 +16,9 @@ class BackendLayer : public QThread
 
 public:
     BackendLayer();
+
+signals:
+    void patternAdded(size_t parentId, const PatternTree& ptree);
 
 public slots:
     void addPattern(const QStringList& sequence);

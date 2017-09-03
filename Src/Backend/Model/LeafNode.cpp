@@ -6,7 +6,7 @@ namespace MPM {
 namespace Model {
 
 LeafNode::LeafNode(DataType value)
-    : SimpleExpression(Utils::charToString(value))
+    : SimpleExpression(value)
     , mValue(value)
 {
 
@@ -29,7 +29,7 @@ std::shared_ptr<IExpression> LeafNode::clone() const {
 
 std::string LeafNode::getName() const
 {
-    return Utils::charToString(getValue());
+    return getValue();
 }
 
 }
