@@ -37,7 +37,9 @@ void TreeView::addPattern(size_t parentId, const PatternTree &ptree)
     Q_UNUSED(parentId);
 
     std::shared_ptr<PatternTree::Node> rootNode = ptree.getRootNode();
-    addTopLevelItem(unrollTree(nullptr, rootNode));
+    auto item = unrollTree(nullptr, rootNode);
+    addTopLevelItem(item);
+    expandItem(item);
 }
 
 }
