@@ -27,5 +27,10 @@ void ProjectContext::addPattern(const QStringList &sequence)
     emit patternAdded(Model::IExpression::INVALID_ID, BackUtils::ptreeFromIExpression(newExpr));
 }
 
+void ProjectContext::splice(size_t id1, size_t id2)
+{
+    qDebug() << "ProjectContext received request to splice " << id1 << " and " << id2;
+}
+
 }
 }

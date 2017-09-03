@@ -21,6 +21,9 @@ public:
 
     void addPattern(size_t parentId, const PatternTree& ptree);
 
+signals:
+    void splicingRequested(size_t id1, size_t id2);
+
 private:
     void arrangeWidgets();
 

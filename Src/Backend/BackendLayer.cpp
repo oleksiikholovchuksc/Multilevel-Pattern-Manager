@@ -18,6 +18,11 @@ void BackendLayer::addPattern(const QStringList &sequence)
     mContext->addPattern(sequence);
 }
 
+void BackendLayer::splice(size_t id1, size_t id2)
+{
+    mContext->splice(id1, id2);
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();

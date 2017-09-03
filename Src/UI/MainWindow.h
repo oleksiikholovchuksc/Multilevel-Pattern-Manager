@@ -22,6 +22,7 @@ public slots:
 
 signals:
     void addPatternRequest(const QStringList& sequence);
+    void splicingRequested(size_t id1, size_t id2);
 
 private:
     void createToolbar();

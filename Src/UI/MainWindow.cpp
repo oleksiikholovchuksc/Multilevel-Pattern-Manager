@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     createToolbar();
 
     setCentralWidget(mViewWidget);
+
+    connect(mViewWidget, &ViewWidget::splicingRequested, this, &MainWindow::splicingRequested);
 }
 
 void MainWindow::addPattern(size_t parentId, const PatternTree &ptree)

@@ -13,6 +13,13 @@ public:
     TreeView();
 
     void addPattern(size_t parentId, const PatternTree& ptree);
+
+signals:
+    void splicingRequested(size_t id1, size_t id2);
+
+protected:
+    void dragEnterEvent(QDragEnterEvent *e);
+    void dropEvent(QDropEvent *e);
 };
 }
 

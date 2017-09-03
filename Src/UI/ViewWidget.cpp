@@ -43,6 +43,8 @@ void ViewWidget::arrangeWidgets()
 
     mTreeView->setFixedWidth(250);
     mInspectorView->setFixedWidth(250);
+
+    connect(mTreeView, &TreeView::splicingRequested, this, &ViewWidget::splicingRequested);
 }
 
 }

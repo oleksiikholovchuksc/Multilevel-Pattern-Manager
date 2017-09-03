@@ -22,6 +22,7 @@ signals:
 
 public slots:
     void addPattern(const QStringList& sequence);
+    void splice(size_t id1, size_t id2);
 
 private slots:
     void init();

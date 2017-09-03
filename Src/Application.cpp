@@ -16,8 +16,12 @@ Application::Application(int argc, char** argv)
 
 void Application::connectLayers()
 {
+    // add new
     connect(mMainWindow, &MainWindow::addPatternRequest, mBackendLayer, &Backend::BackendLayer::addPattern);
     connect(mBackendLayer, &Backend::BackendLayer::patternAdded, mMainWindow, &MainWindow::addPattern);
+
+    // splice
+    connect(mMainWindow, &MainWindow::splicingRequested, mBackendLayer, &Backend::BackendLayer::splice);
 }
 
 int Application::exec()
