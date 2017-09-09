@@ -10,7 +10,8 @@ class SimpleExpression : public IExpression
 {
 public:
     SimpleExpression(
-            const std::string& name,
+            size_t id = IExpression::INVALID_ID,
+            const std::string& name = std::string(),
             const std::vector<std::shared_ptr<IExpression>>& structure = {});
 
     const std::vector<std::shared_ptr<IExpression>>& getStructure() const;

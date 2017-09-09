@@ -12,14 +12,20 @@ class IExpression
 public:
     static constexpr size_t INVALID_ID = std::numeric_limits<size_t>::max();
 
-    virtual ~IExpression() {}
+    IExpression(size_t id = INVALID_ID)
+        : mId(id) {}
 
-    size_t getID() const { return reinterpret_cast<size_t>(this); }
+    virtual ~IExpression() {}
 
     virtual bool isEqual(const IExpression* other) const = 0;
     virtual std::vector<const IExpression*> getOperands() const = 0;
     virtual std::shared_ptr<IExpression> clone() const = 0;
     virtual std::string getName() const = 0;
+
+    size_t getID() const { return mId; }
+
+private:
+    size_t mId = INVALID_ID;
 };
 
 }

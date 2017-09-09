@@ -4,9 +4,12 @@
 namespace MPM {
 namespace Model {
 
-SimpleExpression::SimpleExpression(const std::string& name,
-                                   const std::vector<std::shared_ptr<IExpression>>& structure)
-    : mName(name)
+SimpleExpression::SimpleExpression(
+        size_t id,
+        const std::string& name,
+        const std::vector<std::shared_ptr<IExpression>>& structure)
+    : IExpression(id)
+    , mName(name)
     , mStructure(structure)
 {
 
@@ -49,7 +52,7 @@ std::shared_ptr<IExpression> SimpleExpression::clone() const {
         cloneStructure.push_back(expressionClone);
     }
 
-    return std::make_shared<SimpleExpression>(getName(), cloneStructure);
+    return std::make_shared<SimpleExpression>(getID(), getName(), cloneStructure);
 }
 
 std::string SimpleExpression::getName() const

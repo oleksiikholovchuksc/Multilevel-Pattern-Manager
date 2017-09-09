@@ -7,8 +7,12 @@
 namespace MPM {
 namespace Model {
 
-BinaryExpression::BinaryExpression(std::shared_ptr<IExpression> left, std::shared_ptr<IExpression> right)
-    : mLeft(left)
+BinaryExpression::BinaryExpression(
+        std::shared_ptr<IExpression> left,
+        std::shared_ptr<IExpression> right,
+        size_t id)
+    : IExpression(id)
+    , mLeft(left)
     , mRight(right)
 {
 

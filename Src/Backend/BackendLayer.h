@@ -19,6 +19,7 @@ public:
 
 signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
+    void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
 
 public slots:
     void addPattern(const QStringList& sequence);

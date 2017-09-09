@@ -46,8 +46,38 @@ void TreeView::addPattern(size_t parentId, const PatternTree &ptree)
     auto item = unrollTree(nullptr, rootNode);
     addTopLevelItem(item);
     expandItem(item);
+}
 
+void TreeView::splicePatterns(size_t sourceId, size_t destId, const PatternTree &ptree)
+{
+    // ensure correctness
+    auto sourceItem = itemById(sourceId);
+    auto destItem = itemById(destId);
+    if(!sourceItem || !destItem)
+    {
+        qWarning() << "Can't splice on UI side.";
+        return;
+    }
 
+    // remove source
+    removeItemWidget(sourceItem, 0);
+    delete sourceItem;
+
+    // find pos of dest
+    int destPos = 0;
+    for(int i = 0; i < topLevelItemCount(); ++i, ++destPos)
+    {
+        auto child = dynamic_cast<TreeWidgetItem*>(topLevelItem(i));
+        if(child && child->id() == destId)
+            break;
+    }
+
+    // remove dest
+    removeItemWidget(destItem, 0);
+    delete destItem;
+
+    // place new item to destPos
+    insertTopLevelItem(destPos, unrollTree(nullptr, ptree.getRootNode()));
 }
 
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
@@ -66,7 +96,8 @@ void TreeView::dragEnterEvent(QDragEnterEvent *e)
 
 void TreeView::dropEvent(QDropEvent *e)
 {
-    QTreeWidgetItem* targetQItem = itemAt(e->pos());
+    QPoint viewportPos = viewport()->mapFromGlobal(QCursor::pos());
+    QTreeWidgetItem* targetQItem = itemAt(viewportPos);
     TreeWidgetItem* targetItem = dynamic_cast<TreeWidgetItem*>(targetQItem);
     if(targetItem)
     {
@@ -84,6 +115,42 @@ void TreeView::dropEvent(QDropEvent *e)
     }
 
     // QTreeWidget::dropEvent(e);  // not called intentionally
+}
+
+TreeWidgetItem *TreeView::itemById(size_t id)
+{
+    for(int i = 0; i < invisibleRootItem()->childCount(); ++i)
+    {
+        auto child = dynamic_cast<TreeWidgetItem*>(invisibleRootItem()->child(i));
+        if(!child)
+            continue;
+
+        if(auto result = searchByIdHelper(child, id))
+            return result;
+    }
+
+    return nullptr;
+}
+
+TreeWidgetItem *TreeView::searchByIdHelper(TreeWidgetItem *currentItem, size_t targetId)
+{
+    if(!currentItem)
+        return nullptr;
+
+    if(currentItem->id() == targetId)
+        return currentItem;
+
+    for(int i = 0; i < currentItem->childCount(); ++i)
+    {
+        auto child = dynamic_cast<TreeWidgetItem*>(currentItem->child(i));
+        if(!child)
+            continue;
+
+        if(auto result = searchByIdHelper(child, targetId))
+            return result;
+    }
+
+    return nullptr;
 }
 
 }

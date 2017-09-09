@@ -22,6 +22,7 @@ void Application::connectLayers()
 
     // splice
     connect(mMainWindow, &MainWindow::splicingRequested, mBackendLayer, &Backend::BackendLayer::splice);
+    connect(mBackendLayer, &Backend::BackendLayer::patternsSpliced, mMainWindow, &MainWindow::splicePatterns);
 }
 
 int Application::exec()

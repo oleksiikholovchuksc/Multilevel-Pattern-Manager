@@ -2,6 +2,7 @@
 #define TREEWIDGETITEM_H
 
 #include <QTreeWidgetItem>
+#include <climits>
 
 namespace MPM {
 
@@ -12,7 +13,7 @@ public:
     size_t id() const;
 
 private:
-    size_t mId;
+    size_t mId = std::numeric_limits<size_t>::max();
 };
 
 }

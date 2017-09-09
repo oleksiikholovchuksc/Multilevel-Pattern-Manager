@@ -5,8 +5,8 @@
 namespace MPM {
 namespace Model {
 
-LeafNode::LeafNode(DataType value)
-    : SimpleExpression(value)
+LeafNode::LeafNode(DataType value, size_t id)
+    : SimpleExpression(id, value)
     , mValue(value)
 {
 

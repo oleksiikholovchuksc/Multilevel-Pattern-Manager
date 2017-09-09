@@ -7,7 +7,10 @@ namespace Model {
 
 class BinaryExpression : public IExpression {
 public:
-    BinaryExpression(std::shared_ptr<IExpression> left, std::shared_ptr<IExpression> right);
+    BinaryExpression(
+            std::shared_ptr<IExpression> left,
+            std::shared_ptr<IExpression> right,
+            size_t id = IExpression::INVALID_ID);
 
     bool isEqual(const IExpression* other) const override;
     std::vector<const IExpression*> getOperands() const override;

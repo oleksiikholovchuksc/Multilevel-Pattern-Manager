@@ -30,6 +30,11 @@ void MainWindow::addPattern(size_t parentId, const PatternTree &ptree)
     mViewWidget->addPattern(parentId, ptree);
 }
 
+void MainWindow::splicePatterns(size_t sourceId, size_t destId, const PatternTree &ptree)
+{
+    mViewWidget->splicePatterns(sourceId, destId, ptree);
+}
+
 void MainWindow::createToolbar()
 {
     MainToolbar *toolbar = new MainToolbar();

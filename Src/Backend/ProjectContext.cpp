@@ -3,8 +3,12 @@
 #include "Backend/PatternFactory.h"
 #include "Backend/Model/SimpleExpression.hpp"
 #include "Backend/Model/LeafNode.hpp"
+#include "Backend/Processors/PatternProcessor.hpp"
 #include "Backend/BackUtilsUtils.h"
+
 #include <QDebug>
+
+#include <algorithm>
 
 namespace MPM {
 namespace Backend {
@@ -34,7 +38,32 @@ void ProjectContext::addPattern(const QStringList &sequence)
 
 void ProjectContext::splice(size_t id1, size_t id2)
 {
-    qDebug() << "ProjectContext received request to splice " << id1 << " and " << id2;
+    auto p1 = getExprById(id1);
+    auto p2 = getExprById(id2);
+
+    if(!p1 || !p2)
+    {
+        qWarning() << "Couldn't splice on backend side";
+        return;
+    }
+
+    auto splicedExpr = Processor::splice(p1, p2);
+
+    emit patternsSpliced(id1, id2, BackUtils::ptreeFromIExpression(splicedExpr));
+}
+
+ProjectContext::ExprPtr ProjectContext::getExprById(size_t id)
+{
+    auto it = std::find_if(mPatterns.begin(), mPatterns.end(),
+                           [id](ExprPtr e) {
+                                if(e) return e->getID() == id;
+                                return false;
+                            });
+
+    if(it != mPatterns.end())
+        return *it;
+
+    return nullptr;
 }
 
 }

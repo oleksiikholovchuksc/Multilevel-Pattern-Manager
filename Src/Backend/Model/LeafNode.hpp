@@ -10,7 +10,7 @@ class LeafNode : public SimpleExpression
 public:
     using DataType = std::string;
 
-    LeafNode(DataType data);
+    LeafNode(DataType data, size_t id = IExpression::INVALID_ID);
     DataType getValue() const;
 
     bool isEqual(const IExpression* other) const override;

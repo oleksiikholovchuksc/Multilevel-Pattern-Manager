@@ -26,6 +26,9 @@ public:
 
 private:
     std::string getNewNameLowLevel(std::vector<MPM::Model::LeafNode::DataType> sequence);
+    size_t getNextID();
+
+    size_t mIdCounter = 0;
 };
 
 }
