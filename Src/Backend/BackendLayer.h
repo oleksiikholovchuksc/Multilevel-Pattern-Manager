@@ -24,6 +24,7 @@ signals:
 public slots:
     void addPattern(const QStringList& sequence);
     void splice(size_t id1, size_t id2);
+    void handleSelectedIdChanged(size_t id);
 
 private slots:
     void init();

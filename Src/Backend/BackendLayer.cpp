@@ -23,6 +23,11 @@ void BackendLayer::splice(size_t id1, size_t id2)
     mContext->splice(id1, id2);
 }
 
+void BackendLayer::handleSelectedIdChanged(size_t id)
+{
+    qDebug() << "Backed knows that selection changed to " << id;
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();

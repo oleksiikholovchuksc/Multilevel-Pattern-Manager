@@ -20,14 +20,20 @@ public:
 
 signals:
     void splicingRequested(size_t id1, size_t id2);
+    void selectedIdChanged(size_t selectedId);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *e);
     void dropEvent(QDropEvent *e);
 
+private slots:
+    void handleItemActivated(QTreeWidgetItem *item, int column);
+
 private:
     TreeWidgetItem* itemById(size_t id);
     TreeWidgetItem* searchByIdHelper(TreeWidgetItem* currentItem, size_t targetId);
+
+    size_t mCurrentSelectedId = std::numeric_limits<size_t>::max();
 };
 }
 

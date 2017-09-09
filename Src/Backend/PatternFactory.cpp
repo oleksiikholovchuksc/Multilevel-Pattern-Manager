@@ -11,8 +11,11 @@ PatternFactory::PatternFactory()
 std::shared_ptr<Model::SimpleExpression>
 PatternFactory::createLowLevelPattern(std::vector<Model::LeafNode::DataType> sequence)
 {
+    // get new id
+    size_t id = getNextID();
+
     // create name
-    std::string name = getNewNameLowLevel(sequence);
+    std::string name = "P" + std::to_string(id);
 
     // create structure
     std::vector<std::shared_ptr<Model::IExpression>> list = {};
@@ -21,15 +24,7 @@ PatternFactory::createLowLevelPattern(std::vector<Model::LeafNode::DataType> seq
         list.push_back(std::make_shared<Model::LeafNode>(elem, getNextID()));
     }
 
-    return std::make_shared<Model::SimpleExpression>(getNextID(), name, list);
-}
-
-std::string PatternFactory::getNewNameLowLevel(std::vector<Model::LeafNode::DataType> sequence)
-{
-    // NIY
-    (void)(sequence);
-
-    return "low_level_p";
+    return std::make_shared<Model::SimpleExpression>(id, name, list);
 }
 
 size_t PatternFactory::getNextID()

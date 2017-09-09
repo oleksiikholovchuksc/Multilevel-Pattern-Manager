@@ -36,6 +36,10 @@ TreeView::TreeView()
     setDragEnabled(true);
     setAcceptDrops(true);
     setDragDropMode(QAbstractItemView::DragDrop);
+    setSelectionBehavior(QAbstractItemView::SelectItems);
+    setSelectionMode(QAbstractItemView::SingleSelection);
+
+    connect(this, &QTreeWidget::itemClicked, this, &TreeView::handleItemActivated);
 }
 
 void TreeView::addPattern(size_t parentId, const PatternTree &ptree)
@@ -117,6 +121,18 @@ void TreeView::dropEvent(QDropEvent *e)
     }
 
     // QTreeWidget::dropEvent(e);  // not called intentionally
+}
+
+void TreeView::handleItemActivated(QTreeWidgetItem *item, int column)
+{
+    Q_UNUSED(column);
+
+    auto myItem = dynamic_cast<TreeWidgetItem*>(item);
+    if(myItem)
+    {
+        mCurrentSelectedId = myItem->id();
+        emit selectedIdChanged(mCurrentSelectedId);
+    }
 }
 
 TreeWidgetItem *TreeView::itemById(size_t id)

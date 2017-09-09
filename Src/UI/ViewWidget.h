@@ -24,6 +24,10 @@ public:
 
 signals:
     void splicingRequested(size_t id1, size_t id2);
+    void selectedIdChanged(size_t id);
+
+private slots:
+    void handleSelectionChanged(size_t id);
 
 private:
     void arrangeWidgets();
@@ -31,6 +35,7 @@ private:
     GraphicsView *mGraphView;
     InspectorView *mInspectorView;
     TreeView *mTreeView;
+    size_t mCurrentSelectedId = std::numeric_limits<size_t>::max();
 };
 
 }

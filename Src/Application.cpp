@@ -23,6 +23,9 @@ void Application::connectLayers()
     // splice
     connect(mMainWindow, &MainWindow::splicingRequested, mBackendLayer, &Backend::BackendLayer::splice);
     connect(mBackendLayer, &Backend::BackendLayer::patternsSpliced, mMainWindow, &MainWindow::splicePatterns);
+
+    // selection and data moves
+    connect(mMainWindow, &MainWindow::selectedIdChanged, mBackendLayer, &Backend::BackendLayer::handleSelectedIdChanged);
 }
 
 int Application::exec()

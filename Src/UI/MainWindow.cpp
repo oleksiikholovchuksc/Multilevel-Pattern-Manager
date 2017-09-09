@@ -3,12 +3,15 @@
 #include "ViewWidget.h"
 #include "MainToolbar.h"
 
+#include <QStatusBar>
 #include <QPushButton>
 #include <QToolBar>
 #include <QThread>
 #include <QDebug>
 
 namespace MPM {
+
+static const int STATUSBAR_MSG_TIMEOUT = 6;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,10 +22,18 @@ MainWindow::MainWindow(QWidget *parent)
     showMaximized();
 
     createToolbar();
+    createStatusBar();
 
     setCentralWidget(mViewWidget);
 
     connect(mViewWidget, &ViewWidget::splicingRequested, this, &MainWindow::splicingRequested);
+    connect(mViewWidget, &ViewWidget::selectedIdChanged, this, &MainWindow::selectedIdChanged);
+}
+
+void MainWindow::showStatusBarMessage(const QString &msg)
+{
+    if(statusBar())
+        statusBar()->showMessage(msg, STATUSBAR_MSG_TIMEOUT);
 }
 
 void MainWindow::addPattern(size_t parentId, const PatternTree &ptree)
@@ -40,6 +51,12 @@ void MainWindow::createToolbar()
     MainToolbar *toolbar = new MainToolbar();
     addToolBar(Qt::TopToolBarArea, toolbar);
     connect(toolbar, &MainToolbar::addPatternRequested, this, &MainWindow::addPatternRequest);
+}
+
+void MainWindow::createStatusBar()
+{
+    QStatusBar *statusBar = new QStatusBar();
+    setStatusBar(statusBar);
 }
 
 }

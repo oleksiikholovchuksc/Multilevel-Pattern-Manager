@@ -19,9 +19,7 @@ ViewWidget::ViewWidget()
 
 size_t ViewWidget::getSelectedId() const
 {
-    // NIY
-
-    return 123;
+    return mCurrentSelectedId;
 }
 
 void ViewWidget::addPattern(size_t parentId, const PatternTree &ptree)
@@ -32,6 +30,15 @@ void ViewWidget::addPattern(size_t parentId, const PatternTree &ptree)
 void ViewWidget::splicePatterns(size_t sourceId, size_t destId, const PatternTree &ptree)
 {
     mTreeView->splicePatterns(sourceId, destId, ptree);
+}
+
+void ViewWidget::handleSelectionChanged(size_t id)
+{
+    if(id != mCurrentSelectedId)
+    {
+        mCurrentSelectedId = id;
+        emit selectedIdChanged(mCurrentSelectedId);
+    }
 }
 
 void ViewWidget::arrangeWidgets()
@@ -51,6 +58,7 @@ void ViewWidget::arrangeWidgets()
     mInspectorView->setFixedWidth(250);
 
     connect(mTreeView, &TreeView::splicingRequested, this, &ViewWidget::splicingRequested);
+    connect(mTreeView, &TreeView::selectedIdChanged, this, &ViewWidget::handleSelectionChanged);
 }
 
 }

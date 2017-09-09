@@ -17,6 +17,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0);
 
+    void showStatusBarMessage(const QString& msg);
+
 public slots:
     void addPattern(size_t parentId, const PatternTree& ptree);
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
@@ -24,9 +26,11 @@ public slots:
 signals:
     void addPatternRequest(const QStringList& sequence);
     void splicingRequested(size_t id1, size_t id2);
+    void selectedIdChanged(size_t id);
 
 private:
     void createToolbar();
+    void createStatusBar();
 
     QPushButton* mAddObjectButton;
     ViewWidget *mViewWidget;
