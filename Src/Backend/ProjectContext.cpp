@@ -15,6 +15,11 @@ ProjectContext::ProjectContext()
 
 }
 
+ProjectContext::~ProjectContext()
+{
+
+}
+
 void ProjectContext::addPattern(const QStringList &sequence)
 {
     std::vector<std::string> stringVec;

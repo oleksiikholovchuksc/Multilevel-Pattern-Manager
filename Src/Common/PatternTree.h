@@ -1,6 +1,7 @@
 #ifndef PATTERNTREE_H
 #define PATTERNTREE_H
 
+#include <string>
 #include <vector>
 #include <memory>
 

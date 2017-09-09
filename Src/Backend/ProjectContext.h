@@ -27,6 +27,7 @@ public:
     using ExprPtr = std::shared_ptr<Model::IExpression>;
 
     ProjectContext();
+    ~ProjectContext();
 
 signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);

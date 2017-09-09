@@ -27,6 +27,7 @@ PatternFactory::createLowLevelPattern(std::vector<Model::LeafNode::DataType> seq
 std::string PatternFactory::getNewNameLowLevel(std::vector<Model::LeafNode::DataType> sequence)
 {
     // NIY
+    (void)(sequence);
 
     return "low_level_p";
 }

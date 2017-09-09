@@ -6,6 +6,8 @@
 
 QT += core gui widgets
 
+CONFIG += c++14
+
 TARGET = Multilevel-Pattern-Manager
 TEMPLATE = app
 
