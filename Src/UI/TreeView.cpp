@@ -77,7 +77,9 @@ void TreeView::splicePatterns(size_t sourceId, size_t destId, const PatternTree 
     delete destItem;
 
     // place new item to destPos
-    insertTopLevelItem(destPos, unrollTree(nullptr, ptree.getRootNode()));
+    auto splicedItem = unrollTree(nullptr, ptree.getRootNode());
+    insertTopLevelItem(destPos, splicedItem);
+    expandItem(splicedItem);
 }
 
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
