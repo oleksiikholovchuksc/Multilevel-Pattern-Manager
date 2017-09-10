@@ -33,13 +33,12 @@ TreeView::TreeView()
 {
     setHeaderLabel("Pattern tree");
     setColumnCount(1);
-    setDragEnabled(true);
     setAcceptDrops(true);
     setDragDropMode(QAbstractItemView::DragDrop);
     setSelectionBehavior(QAbstractItemView::SelectItems);
     setSelectionMode(QAbstractItemView::SingleSelection);
 
-    connect(this, &QTreeWidget::itemClicked, this, &TreeView::handleItemActivated);
+    connect(this, &QTreeWidget::itemPressed, this, &TreeView::handleItemActivated);
 }
 
 void TreeView::addPattern(size_t parentId, const PatternTree &ptree)
@@ -88,8 +87,7 @@ void TreeView::splicePatterns(size_t sourceId, size_t destId, const PatternTree 
 
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
 {
-    QTreeWidgetItem* sourceQItem = itemAt(e->pos());
-    TreeWidgetItem* sourceItem = dynamic_cast<TreeWidgetItem*>(sourceQItem);
+    TreeWidgetItem* sourceItem = mCurrentSelectedItem;
     if(sourceItem)
     {
         auto* mimeData = const_cast<QMimeData*>(e->mimeData());
@@ -102,8 +100,7 @@ void TreeView::dragEnterEvent(QDragEnterEvent *e)
 
 void TreeView::dropEvent(QDropEvent *e)
 {
-    QPoint viewportPos = viewport()->mapFromGlobal(QCursor::pos());
-    QTreeWidgetItem* targetQItem = itemAt(viewportPos);
+    QTreeWidgetItem* targetQItem = itemAt((e->pos()));
     TreeWidgetItem* targetItem = dynamic_cast<TreeWidgetItem*>(targetQItem);
     if(targetItem)
     {
@@ -131,6 +128,7 @@ void TreeView::handleItemActivated(QTreeWidgetItem *item, int column)
     if(myItem)
     {
         mCurrentSelectedId = myItem->id();
+        mCurrentSelectedItem = myItem;
         emit selectedIdChanged(mCurrentSelectedId);
     }
 }

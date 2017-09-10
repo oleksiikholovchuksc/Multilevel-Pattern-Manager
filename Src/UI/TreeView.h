@@ -34,6 +34,7 @@ private:
     TreeWidgetItem* searchByIdHelper(TreeWidgetItem* currentItem, size_t targetId);
 
     size_t mCurrentSelectedId = std::numeric_limits<size_t>::max();
+    TreeWidgetItem* mCurrentSelectedItem = nullptr;
 };
 }
 
