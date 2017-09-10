@@ -28,6 +28,10 @@ void Application::connectLayers()
     // selection and data moves
     connect(mMainWindow, &MainWindow::selectedIdChanged, mBackendLayer, &Backend::BackendLayer::handleSelectedIdChanged);
     connect(mBackendLayer, &Backend::BackendLayer::currentNodeChanged, mMainWindow, &MainWindow::presentNode);
+
+    // reparenting
+    connect(mMainWindow, &MainWindow::reparentingRequested, mBackendLayer, &Backend::BackendLayer::reparent);
+    connect(mBackendLayer, &Backend::BackendLayer::reparented, mMainWindow, &MainWindow::reparent);
 }
 
 int Application::exec()

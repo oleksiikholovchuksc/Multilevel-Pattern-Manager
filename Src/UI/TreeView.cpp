@@ -85,6 +85,21 @@ void TreeView::splicePatterns(size_t sourceId, size_t destId, const PatternTree 
     expandItem(splicedItem);
 }
 
+void TreeView::reparent(size_t sourceId, size_t targetId)
+{
+    auto sourceItem = itemById(sourceId);
+    auto targetItem = itemById(targetId);
+
+    if(!sourceItem || !targetItem)
+    {
+        qWarning() << "Couldn't reparent on UI size";
+        return;
+    }
+
+    invisibleRootItem()->removeChild(sourceItem);
+    targetItem->addChild(sourceItem);
+}
+
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
 {
     TreeWidgetItem* sourceItem = mCurrentSelectedItem;
@@ -113,7 +128,14 @@ void TreeView::dropEvent(QDropEvent *e)
 
             size_t targetId = targetItem->id();
 
-            emit splicingRequested(sourceId, targetId);
+            if(e->keyboardModifiers() & Qt::ShiftModifier)
+            {
+                emit splicingRequested(sourceId, targetId);
+            }
+            else
+            {
+                emit reparentingRequested(sourceId, targetId);
+            }
         }
     }
 

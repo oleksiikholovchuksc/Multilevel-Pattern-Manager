@@ -25,11 +25,13 @@ public slots:
     void addPattern(size_t parentId, const PatternTree& ptree);
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
     void presentNode(const NodeUIData& data);
+    void reparent(size_t sourceId, size_t targetId);
 
 signals:
     void addPatternRequest(const QStringList& sequence);
     void splicingRequested(size_t id1, size_t id2);
     void selectedIdChanged(size_t id);
+    void reparentingRequested(size_t sourceId, size_t targetId);
 
 private:
     void createToolbar();

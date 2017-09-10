@@ -44,6 +44,11 @@ const std::vector<std::shared_ptr<IExpression>>& SimpleExpression::getStructure(
     return mStructure;
 }
 
+void SimpleExpression::addChild(std::shared_ptr<IExpression> expr)
+{
+    mStructure.push_back(expr);
+}
+
 std::shared_ptr<IExpression> SimpleExpression::clone() const {
     std::vector<std::shared_ptr<IExpression>> cloneStructure;
     for(const auto& structureItem : mStructure)

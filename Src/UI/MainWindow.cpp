@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(mViewWidget, &ViewWidget::splicingRequested, this, &MainWindow::splicingRequested);
     connect(mViewWidget, &ViewWidget::selectedIdChanged, this, &MainWindow::selectedIdChanged);
+    connect(mViewWidget, &ViewWidget::reparentingRequested, this, &MainWindow::reparentingRequested);
 }
 
 void MainWindow::showStatusBarMessage(const QString &msg)
@@ -49,6 +50,11 @@ void MainWindow::splicePatterns(size_t sourceId, size_t destId, const PatternTre
 void MainWindow::presentNode(const NodeUIData &data)
 {
     mViewWidget->presentNode(data);
+}
+
+void MainWindow::reparent(size_t sourceId, size_t targetId)
+{
+    mViewWidget->reparent(sourceId, targetId);
 }
 
 void MainWindow::createToolbar()

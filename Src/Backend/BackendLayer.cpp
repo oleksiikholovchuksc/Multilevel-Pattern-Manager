@@ -31,11 +31,17 @@ void BackendLayer::handleSelectedIdChanged(size_t id)
     emit currentNodeChanged(NodeDataCreator::createData(expr));
 }
 
+void BackendLayer::reparent(size_t sourceId, size_t targetId)
+{
+    mContext->reparent(sourceId, targetId);
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();
     connect(mContext.get(), &ProjectContext::patternAdded, this, &BackendLayer::patternAdded);
     connect(mContext.get(), &ProjectContext::patternsSpliced, this, &BackendLayer::patternsSpliced);
+    connect(mContext.get(), &ProjectContext::reparented, this, &BackendLayer::reparented);
 }
 
 }

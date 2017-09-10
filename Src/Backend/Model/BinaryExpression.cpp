@@ -4,6 +4,7 @@
 
 #include "BinaryExpression.h"
 
+
 namespace MPM {
 namespace Model {
 
@@ -39,7 +40,7 @@ std::shared_ptr<IExpression> BinaryExpression::clone() const {
 
 std::string BinaryExpression::getName() const
 {
-    return mLeft->getName() + " | " + mRight->getName();
+    return "(" + mLeft->getName() + " | " + mRight->getName() + ")";
 }
 
 }

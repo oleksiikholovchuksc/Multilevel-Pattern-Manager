@@ -9,6 +9,9 @@ namespace MPM {
 class TreeWidgetItem : public QTreeWidgetItem
 {
 public:
+    TreeWidgetItem();
+    TreeWidgetItem(const QTreeWidgetItem& other);
+
     void setId(size_t id);
     size_t id() const;
 

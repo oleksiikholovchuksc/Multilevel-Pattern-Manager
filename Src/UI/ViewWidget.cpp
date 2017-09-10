@@ -37,6 +37,11 @@ void ViewWidget::presentNode(const NodeUIData &data)
     mInspectorView->presentNode(data);
 }
 
+void ViewWidget::reparent(size_t sourceId, size_t targetId)
+{
+    mTreeView->reparent(sourceId, targetId);
+}
+
 void ViewWidget::handleSelectionChanged(size_t id)
 {
     if(id != mCurrentSelectedId)
@@ -64,6 +69,7 @@ void ViewWidget::arrangeWidgets()
 
     connect(mTreeView, &TreeView::splicingRequested, this, &ViewWidget::splicingRequested);
     connect(mTreeView, &TreeView::selectedIdChanged, this, &ViewWidget::handleSelectionChanged);
+    connect(mTreeView, &TreeView::reparentingRequested, this, &ViewWidget::reparentingRequested);
 }
 
 }

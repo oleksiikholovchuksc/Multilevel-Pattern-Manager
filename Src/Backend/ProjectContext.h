@@ -30,17 +30,20 @@ public:
     ~ProjectContext();
 
     ExprPtr getExpr(size_t id);
+    ExprPtr getTopLevelExpr(size_t id);
+    bool removeTopLevelExpr(size_t id);
 
 signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
+    void reparented(size_t sourceId, size_t destId);
 
 public slots:
     void addPattern(const QStringList& sequence);
     void splice(size_t sourceId, size_t destinationId);
+    void reparent(size_t sourceId, size_t destinationId);
 
 private:
-
     std::unique_ptr<PatternFactory> mFactory;
     std::vector<ExprPtr> mPatterns;
 };

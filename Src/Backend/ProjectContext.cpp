@@ -110,6 +110,30 @@ void ProjectContext::splice(size_t sourceId, size_t destId)
     emit patternsSpliced(sourceId, destId, BackUtils::ptreeFromIExpression(splicedExpr));
 }
 
+void ProjectContext::reparent(size_t sourceId, size_t destinationId)
+{
+    auto source = getTopLevelExpr(sourceId);
+    auto dest = getExpr(destinationId);
+
+    if(!source || !dest)
+    {
+        qWarning() << "Couldn't reparent on backend side";
+        return;
+    }
+
+    if(auto asSimple = std::dynamic_pointer_cast<Model::SimpleExpression>(dest))
+    {
+        asSimple->addChild(source);
+        removeTopLevelExpr(sourceId);
+        emit reparented(sourceId, destinationId);
+    }
+    else
+    {
+        qWarning() << "It's possible to reparent only to simple expressions";
+        return;
+    }
+}
+
 ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)
 {
     for(const auto& expr : mPatterns)
@@ -119,6 +143,31 @@ ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)
     }
 
     return nullptr;
+}
+
+ProjectContext::ExprPtr ProjectContext::getTopLevelExpr(size_t id)
+{
+    for(const auto expr : mPatterns)
+    {
+        if(expr->getID() == id)
+            return expr;
+    }
+
+    return nullptr;
+}
+
+bool ProjectContext::removeTopLevelExpr(size_t id)
+{
+    for(auto it = mPatterns.begin(); it < mPatterns.end(); ++it)
+    {
+        if((*it)->getID() == id)
+        {
+            mPatterns.erase(it);
+            return true;
+        }
+    }
+
+    return false;
 }
 
 }
