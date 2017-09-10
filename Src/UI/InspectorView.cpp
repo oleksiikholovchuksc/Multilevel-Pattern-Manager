@@ -26,7 +26,7 @@ static void prepareFont(QLabel* label)
 
 namespace MPM {
 InspectorView::InspectorView()
-    : mMinimizeButton(new QPushButton("Minimize"))
+    : mMinimizeButton(new QPushButton(QIcon("://Resources/minimize.png"), "Minimize"))
     , mNameLabel(new QLabel())
     , mIdLabel(new QLabel())
     , mDummyDataLabel1(new QLabel())

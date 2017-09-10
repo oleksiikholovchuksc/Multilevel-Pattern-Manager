@@ -72,3 +72,6 @@ HEADERS += \
 mac {
     QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror
 }
+
+RESOURCES += \
+    resources.qrc

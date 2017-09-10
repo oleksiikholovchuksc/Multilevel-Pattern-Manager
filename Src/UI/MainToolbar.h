@@ -18,12 +18,14 @@ public:
 
 signals:
     void addPatternRequested(const QStringList& sequence);
+    void removeRequested();
 
 private slots:
     void requestNewPattern();
 
 private:
     QPushButton *mAddButton;
+    QPushButton *mRemoveButton;
     NewPatternDialog *mDialog;
 };
 }

@@ -5,7 +5,8 @@
 
 namespace MPM {
 MainToolbar::MainToolbar()
-    : mAddButton(new QPushButton("Add pattern", this))
+    : mAddButton(new QPushButton(QIcon("://Resources/add.png"), "Add pattern", this))
+    , mRemoveButton(new QPushButton(QIcon("://Resources/minus.png"), "Remove", this))
     , mDialog(new NewPatternDialog(this))
 {
     // conf button
@@ -22,6 +23,8 @@ MainToolbar::MainToolbar()
 
     // conf dialog
     connect(mDialog, &NewPatternDialog::accepted, this, &MainToolbar::requestNewPattern);
+
+    addWidget(mRemoveButton);
 }
 
 void MainToolbar::requestNewPattern()
