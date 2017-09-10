@@ -1,7 +1,13 @@
 #ifndef INSPECTORVIEW_H
 #define INSPECTORVIEW_H
 
+#include "Common/NodeUIData.h"
+
 #include <QWidget>
+
+
+class QPushButton;
+class QLabel;
 
 namespace MPM {
 class InspectorView : public QWidget
@@ -10,6 +16,18 @@ class InspectorView : public QWidget
 
 public:
     InspectorView();
+
+    void presentNode(const NodeUIData& data);
+
+private:
+    void arrangeWidgets();
+
+    QPushButton *mMinimizeButton;
+    QLabel *mNameLabel;
+    QLabel *mIdLabel;
+    QLabel *mDummyDataLabel1;
+    QLabel *mDummyDataLabel2;
+    QLabel *mDummyDataLabel3;
 };
 }
 

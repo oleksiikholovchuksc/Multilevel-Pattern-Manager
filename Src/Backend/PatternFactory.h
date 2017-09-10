@@ -21,8 +21,11 @@ class PatternFactory
 public:
     PatternFactory();
 
-    std::shared_ptr<MPM::Model::SimpleExpression>
-    createLowLevelPattern(std::vector<MPM::Model::LeafNode::DataType> sequence);
+    std::shared_ptr<Model::SimpleExpression>
+    createLowLevelPattern(std::vector<Model::LeafNode::DataType> sequence);
+
+    std::shared_ptr<Model::BinaryExpression>
+    getSpliced(std::shared_ptr<Model::IExpression> left, std::shared_ptr<Model::IExpression> right);
 
 private:
     size_t getNextID();

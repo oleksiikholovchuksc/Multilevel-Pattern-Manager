@@ -12,6 +12,7 @@ Application::Application(int argc, char** argv)
 {
     qRegisterMetaType<size_t>("size_t");
     qRegisterMetaType<PatternTree>("PatternTree");
+    qRegisterMetaType<NodeUIData>("NodeUIData");
 }
 
 void Application::connectLayers()
@@ -26,6 +27,7 @@ void Application::connectLayers()
 
     // selection and data moves
     connect(mMainWindow, &MainWindow::selectedIdChanged, mBackendLayer, &Backend::BackendLayer::handleSelectedIdChanged);
+    connect(mBackendLayer, &Backend::BackendLayer::currentNodeChanged, mMainWindow, &MainWindow::presentNode);
 }
 
 int Application::exec()

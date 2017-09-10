@@ -9,9 +9,45 @@
 #include <QDebug>
 
 #include <algorithm>
+#include <cassert>
 
 namespace MPM {
 namespace Backend {
+
+static ProjectContext::ExprPtr getExprHelper(ProjectContext::ExprPtr e, size_t id)
+{
+    if(!e)
+        return nullptr;
+
+    if(e->getID() == id)
+        return e;
+
+    if(!std::dynamic_pointer_cast<Model::LeafNode>(e))
+    {
+        std::vector<std::shared_ptr<Model::IExpression>> exprVec = {};
+        if(auto bin = std::dynamic_pointer_cast<Model::BinaryExpression>(e))
+        {
+            exprVec = bin->getOperands();
+        }
+        else if(auto simple = std::dynamic_pointer_cast<Model::SimpleExpression>(e))
+        {
+            for(auto structureUnit : simple->getStructure())
+                exprVec.push_back(structureUnit);
+        }
+        else
+        {
+            assert(false);  // wtf blyat
+        }
+
+        for(auto expr : exprVec)
+        {
+            if(auto result = getExprHelper(expr, id))
+                return result;
+        }
+    }
+
+    return nullptr;
+}
 
 ProjectContext::ProjectContext()
     : mFactory(std::make_unique<PatternFactory>())
@@ -36,10 +72,11 @@ void ProjectContext::addPattern(const QStringList &sequence)
     emit patternAdded(Model::IExpression::INVALID_ID, BackUtils::ptreeFromIExpression(newExpr));
 }
 
-void ProjectContext::splice(size_t id1, size_t id2)
+void ProjectContext::splice(size_t sourceId, size_t destId)
 {
-    auto p1 = getExprById(id1);
-    auto p2 = getExprById(id2);
+    // get patterns to splice
+    auto p1 = getExpr(sourceId);
+    auto p2 = getExpr(destId);
 
     if(!p1 || !p2)
     {
@@ -47,21 +84,39 @@ void ProjectContext::splice(size_t id1, size_t id2)
         return;
     }
 
-    auto splicedExpr = Processor::splice(p1, p2);
+    // do actual splicing
+    auto splicedExpr = mFactory->getSpliced(p1, p2);
 
-    emit patternsSpliced(id1, id2, BackUtils::ptreeFromIExpression(splicedExpr));
+    // remove source
+    for(auto it = mPatterns.begin(); it < mPatterns.end(); ++it)
+    {
+        if((*it)->getID() == sourceId)
+        {
+            mPatterns.erase(it);
+            break;
+        }
+    }
+
+    // insert spliced expr instead of dest
+    for(size_t i = 0; i < mPatterns.size(); ++i)
+    {
+        if(mPatterns[i]->getID() == destId)
+        {
+            mPatterns[i] = splicedExpr;
+            break;
+        }
+    }
+
+    emit patternsSpliced(sourceId, destId, BackUtils::ptreeFromIExpression(splicedExpr));
 }
 
-ProjectContext::ExprPtr ProjectContext::getExprById(size_t id)
+ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)
 {
-    auto it = std::find_if(mPatterns.begin(), mPatterns.end(),
-                           [id](ExprPtr e) {
-                                if(e) return e->getID() == id;
-                                return false;
-                            });
-
-    if(it != mPatterns.end())
-        return *it;
+    for(const auto& expr : mPatterns)
+    {
+        if(auto result = getExprHelper(expr, id))
+            return result;
+    }
 
     return nullptr;
 }

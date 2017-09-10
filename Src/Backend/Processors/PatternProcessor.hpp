@@ -9,8 +9,10 @@
 namespace MPM {
 namespace Processor {
 
-std::shared_ptr<Model::BinaryExpression> splice(std::shared_ptr<Model::IExpression> left,
-                                                std::shared_ptr<Model::IExpression> right);
+std::shared_ptr<Model::BinaryExpression> splice(
+        size_t splicedId,
+        std::shared_ptr<Model::IExpression> left,
+        std::shared_ptr<Model::IExpression> right);
 
 std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryExpression> expr);
 

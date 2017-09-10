@@ -10,7 +10,7 @@ namespace BackUtils {
 
 std::shared_ptr<PatternTree::Node> conversionHelper(
         std::shared_ptr<PatternTree::Node> parent,
-        const Model::IExpression* e)
+        std::shared_ptr<Model::IExpression> e)
 {
     if(!e)
         return nullptr;
@@ -24,17 +24,17 @@ std::shared_ptr<PatternTree::Node> conversionHelper(
         parent->children.push_back(node);
     }
 
-    if(!dynamic_cast<const Model::LeafNode*>(e))
+    if(!std::dynamic_pointer_cast<Model::LeafNode>(e))
     {
-        std::vector<const Model::IExpression*> exprVec = {};
-        if(auto bin = dynamic_cast<const Model::BinaryExpression*>(e))
+        std::vector<std::shared_ptr<Model::IExpression>> exprVec = {};
+        if(auto bin = std::dynamic_pointer_cast<Model::BinaryExpression>(e))
         {
             exprVec = bin->getOperands();
         }
-        else if(auto simple = dynamic_cast<const Model::SimpleExpression*>(e))
+        else if(auto simple = std::dynamic_pointer_cast<Model::SimpleExpression>(e))
         {
             for(auto structureUnit : simple->getStructure())
-                exprVec.push_back(structureUnit.get());
+                exprVec.push_back(structureUnit);
         }
         else
         {
@@ -50,7 +50,7 @@ std::shared_ptr<PatternTree::Node> conversionHelper(
 
 PatternTree ptreeFromIExpression(std::shared_ptr<Model::IExpression> e)
 {
-    return PatternTree(conversionHelper(nullptr, e.get()));
+    return PatternTree(conversionHelper(nullptr, e));
 }
 
 }

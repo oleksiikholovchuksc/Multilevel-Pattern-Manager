@@ -2,6 +2,8 @@
 #define BACKENDLAYER_H
 
 #include "Common/PatternTree.h"
+#include "Common/NodeUIData.h"
+
 #include <QThread>
 #include <memory>
 
@@ -20,6 +22,7 @@ public:
 signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
+    void currentNodeChanged(const NodeUIData& data);
 
 public slots:
     void addPattern(const QStringList& sequence);

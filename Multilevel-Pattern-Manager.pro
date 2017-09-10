@@ -39,7 +39,8 @@ SOURCES += \
     Src/Utils.cpp \
     Src/Common/PatternTree.cpp \
     Src/Backend/BackUtilsUtils.cpp \
-    Src/UI/TreeWidgetItem.cpp
+    Src/UI/TreeWidgetItem.cpp \
+    Src/Backend/NodeDataCreator.cpp
 
 HEADERS += \
     Src/UI/MainWindow.h \
@@ -64,7 +65,9 @@ HEADERS += \
     Src/Utils.h \
     Src/Common/PatternTree.h \
     Src/Backend/BackUtilsUtils.h \
-    Src/UI/TreeWidgetItem.h
+    Src/UI/TreeWidgetItem.h \
+    Src/Common/NodeUIData.h \
+    Src/Backend/NodeDataCreator.h
 
 mac {
     QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror

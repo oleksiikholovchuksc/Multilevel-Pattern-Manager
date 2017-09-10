@@ -29,6 +29,8 @@ public:
     ProjectContext();
     ~ProjectContext();
 
+    ExprPtr getExpr(size_t id);
+
 signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
@@ -38,7 +40,6 @@ public slots:
     void splice(size_t sourceId, size_t destinationId);
 
 private:
-    ExprPtr getExprById(size_t id);
 
     std::unique_ptr<PatternFactory> mFactory;
     std::vector<ExprPtr> mPatterns;

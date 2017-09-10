@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "Common/PatternTree.h"
+#include "Common/NodeUIData.h"
+
 #include <QMainWindow>
 
 class QPushButton;
@@ -22,6 +24,7 @@ public:
 public slots:
     void addPattern(size_t parentId, const PatternTree& ptree);
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
+    void presentNode(const NodeUIData& data);
 
 signals:
     void addPatternRequest(const QStringList& sequence);

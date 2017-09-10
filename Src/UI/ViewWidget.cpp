@@ -32,6 +32,11 @@ void ViewWidget::splicePatterns(size_t sourceId, size_t destId, const PatternTre
     mTreeView->splicePatterns(sourceId, destId, ptree);
 }
 
+void ViewWidget::presentNode(const NodeUIData &data)
+{
+    mInspectorView->presentNode(data);
+}
+
 void ViewWidget::handleSelectionChanged(size_t id)
 {
     if(id != mCurrentSelectedId)
@@ -54,8 +59,8 @@ void ViewWidget::arrangeWidgets()
     mGraphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mInspectorView->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
-    mTreeView->setFixedWidth(250);
-    mInspectorView->setFixedWidth(250);
+    mTreeView->setFixedWidth(350);
+    mInspectorView->setFixedWidth(350);
 
     connect(mTreeView, &TreeView::splicingRequested, this, &ViewWidget::splicingRequested);
     connect(mTreeView, &TreeView::selectedIdChanged, this, &ViewWidget::handleSelectionChanged);

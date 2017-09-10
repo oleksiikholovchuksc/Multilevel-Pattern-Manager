@@ -2,6 +2,7 @@
 
 #include "Utils.h"
 
+
 namespace MPM {
 namespace Model {
 
@@ -24,7 +25,7 @@ LeafNode::DataType LeafNode::getValue() const
 }
 
 std::shared_ptr<IExpression> LeafNode::clone() const {
-    return std::make_shared<LeafNode>(mValue);
+    return std::make_shared<LeafNode>(mValue, getID());
 }
 
 std::string LeafNode::getName() const

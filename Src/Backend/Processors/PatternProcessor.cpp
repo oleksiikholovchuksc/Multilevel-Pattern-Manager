@@ -9,18 +9,19 @@ static std::shared_ptr<Model::SimpleExpression> addDummyParent(std::shared_ptr<M
 }
 
 std::shared_ptr<Model::BinaryExpression> splice(
+        size_t splicedId,
         std::shared_ptr<Model::IExpression> left,
         std::shared_ptr<Model::IExpression> right)
 {
-    return std::make_shared<Model::BinaryExpression>(left->clone(), right->clone());
+    return std::make_shared<Model::BinaryExpression>(left->clone(), right->clone(), splicedId);
 }
 
 std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryExpression> expr) {
     auto left = expr->getOperands()[0];
     auto right = expr->getOperands()[1];
 
-    const Model::SimpleExpression* exprLeft = dynamic_cast<const Model::SimpleExpression*>(left);
-    const Model::SimpleExpression* exprRight = dynamic_cast<const Model::SimpleExpression*>(right);
+    auto exprLeft = std::dynamic_pointer_cast<Model::SimpleExpression>(left);
+    auto exprRight = std::dynamic_pointer_cast<Model::SimpleExpression>(right);
 
     if(!exprLeft || !exprRight)
         return addDummyParent(expr);

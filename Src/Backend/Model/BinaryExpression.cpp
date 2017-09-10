@@ -26,11 +26,11 @@ bool BinaryExpression::isEqual(const IExpression *other) const {
     auto leftExpr = asBinaryExpr->getOperands()[0];
     auto rightExpr = asBinaryExpr->getOperands()[1];
 
-    return mLeft->isEqual(leftExpr) && mRight->isEqual(rightExpr);
+    return mLeft->isEqual(leftExpr.get()) && mRight->isEqual(rightExpr.get());
 }
 
-std::vector<const IExpression *> BinaryExpression::getOperands() const {
-    return { mLeft.get(), mRight.get() };
+std::vector<std::shared_ptr<IExpression>> BinaryExpression::getOperands() const {
+    return { mLeft, mRight };
 }
 
 std::shared_ptr<IExpression> BinaryExpression::clone() const {

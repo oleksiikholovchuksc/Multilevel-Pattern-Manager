@@ -1,4 +1,5 @@
 #include "PatternFactory.h"
+#include "Processors/PatternProcessor.hpp"
 
 namespace MPM {
 namespace Backend {
@@ -25,6 +26,13 @@ PatternFactory::createLowLevelPattern(std::vector<Model::LeafNode::DataType> seq
     }
 
     return std::make_shared<Model::SimpleExpression>(id, name, list);
+}
+
+std::shared_ptr<Model::BinaryExpression> PatternFactory::getSpliced(
+        std::shared_ptr<Model::IExpression> left,
+        std::shared_ptr<Model::IExpression> right)
+{
+    return Processor::splice(getNextID(), left, right);
 }
 
 size_t PatternFactory::getNextID()

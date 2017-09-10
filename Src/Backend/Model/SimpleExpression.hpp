@@ -17,7 +17,7 @@ public:
     const std::vector<std::shared_ptr<IExpression>>& getStructure() const;
 
     bool isEqual(const IExpression* other) const override;
-    std::vector<const IExpression*> getOperands() const override;
+    std::vector<std::shared_ptr<IExpression>> getOperands() const override;
     std::shared_ptr<IExpression> clone() const override;
     std::string getName() const override;
 

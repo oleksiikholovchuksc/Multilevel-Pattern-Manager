@@ -46,6 +46,11 @@ void MainWindow::splicePatterns(size_t sourceId, size_t destId, const PatternTre
     mViewWidget->splicePatterns(sourceId, destId, ptree);
 }
 
+void MainWindow::presentNode(const NodeUIData &data)
+{
+    mViewWidget->presentNode(data);
+}
+
 void MainWindow::createToolbar()
 {
     MainToolbar *toolbar = new MainToolbar();

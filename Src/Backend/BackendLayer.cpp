@@ -1,6 +1,8 @@
 #include "BackendLayer.h"
 
 #include "ProjectContext.h"
+#include "NodeDataCreator.h"
+
 #include <QDebug>
 
 namespace MPM {
@@ -25,7 +27,8 @@ void BackendLayer::splice(size_t id1, size_t id2)
 
 void BackendLayer::handleSelectedIdChanged(size_t id)
 {
-    qDebug() << "Backed knows that selection changed to " << id;
+    auto expr = mContext->getExpr(id);
+    emit currentNodeChanged(NodeDataCreator::createData(expr));
 }
 
 void BackendLayer::init()

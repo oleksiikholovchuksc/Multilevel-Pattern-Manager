@@ -34,9 +34,9 @@ bool SimpleExpression::isEqual(const IExpression* other) const
     return true;
 }
 
-std::vector<const IExpression*> SimpleExpression::getOperands() const
+std::vector<std::shared_ptr<IExpression>> SimpleExpression::getOperands() const
 {
-    return { this };
+    return mStructure;
 }
 
 const std::vector<std::shared_ptr<IExpression>>& SimpleExpression::getStructure() const
