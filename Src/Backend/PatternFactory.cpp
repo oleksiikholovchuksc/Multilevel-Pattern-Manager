@@ -35,6 +35,12 @@ std::shared_ptr<Model::BinaryExpression> PatternFactory::getSpliced(
     return Processor::splice(getNextID(), left, right);
 }
 
+std::shared_ptr<Model::SimpleExpression> PatternFactory::getMinimized(
+        std::shared_ptr<Model::BinaryExpression> expr)
+{
+    return Processor::minimize(expr);
+}
+
 size_t PatternFactory::getNextID()
 {
     return mIdCounter++;

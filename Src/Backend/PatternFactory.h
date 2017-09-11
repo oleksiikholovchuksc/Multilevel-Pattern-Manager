@@ -27,6 +27,8 @@ public:
     std::shared_ptr<Model::BinaryExpression>
     getSpliced(std::shared_ptr<Model::IExpression> left, std::shared_ptr<Model::IExpression> right);
 
+    std::shared_ptr<Model::SimpleExpression> getMinimized(std::shared_ptr<Model::BinaryExpression> expr);
+
 private:
     size_t getNextID();
     size_t mIdCounter = 0;

@@ -24,12 +24,14 @@ signals:
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
     void currentNodeChanged(const NodeUIData& data);
     void reparented(size_t sourceId, size_t destId);
+    void minimized(size_t id, const PatternTree& ptree);
 
 public slots:
     void addPattern(const QStringList& sequence);
     void splice(size_t id1, size_t id2);
     void handleSelectedIdChanged(size_t id);
     void reparent(size_t sourceId, size_t targetId);
+    void minimize(size_t id);
 
 private slots:
     void init();

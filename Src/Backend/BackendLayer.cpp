@@ -36,12 +36,18 @@ void BackendLayer::reparent(size_t sourceId, size_t targetId)
     mContext->reparent(sourceId, targetId);
 }
 
+void BackendLayer::minimize(size_t id)
+{
+    mContext->minimize(id);
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();
     connect(mContext.get(), &ProjectContext::patternAdded, this, &BackendLayer::patternAdded);
     connect(mContext.get(), &ProjectContext::patternsSpliced, this, &BackendLayer::patternsSpliced);
     connect(mContext.get(), &ProjectContext::reparented, this, &BackendLayer::reparented);
+    connect(mContext.get(), &ProjectContext::minimized, this, &BackendLayer::minimized);
 }
 
 }

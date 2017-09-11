@@ -19,6 +19,9 @@ public:
 
     void presentNode(const NodeUIData& data);
 
+signals:
+    void minimizationRequested();
+
 private:
     void arrangeWidgets();
 

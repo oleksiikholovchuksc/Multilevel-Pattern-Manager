@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mViewWidget, &ViewWidget::splicingRequested, this, &MainWindow::splicingRequested);
     connect(mViewWidget, &ViewWidget::selectedIdChanged, this, &MainWindow::selectedIdChanged);
     connect(mViewWidget, &ViewWidget::reparentingRequested, this, &MainWindow::reparentingRequested);
+    connect(mViewWidget, &ViewWidget::minimizationRequested, this, &MainWindow::minimizationRequested);
 }
 
 void MainWindow::showStatusBarMessage(const QString &msg)
@@ -55,6 +56,11 @@ void MainWindow::presentNode(const NodeUIData &data)
 void MainWindow::reparent(size_t sourceId, size_t targetId)
 {
     mViewWidget->reparent(sourceId, targetId);
+}
+
+void MainWindow::minimize(size_t id, const PatternTree &ptree)
+{
+    mViewWidget->minimize(id, ptree);
 }
 
 void MainWindow::createToolbar()

@@ -37,11 +37,13 @@ signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
     void reparented(size_t sourceId, size_t destId);
+    void minimized(size_t id, const PatternTree& ptree);
 
 public slots:
     void addPattern(const QStringList& sequence);
     void splice(size_t sourceId, size_t destinationId);
     void reparent(size_t sourceId, size_t destinationId);
+    void minimize(size_t id);
 
 private:
     std::unique_ptr<PatternFactory> mFactory;

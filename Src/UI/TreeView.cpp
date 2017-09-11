@@ -100,6 +100,27 @@ void TreeView::reparent(size_t sourceId, size_t targetId)
     targetItem->addChild(sourceItem);
 }
 
+void TreeView::minimize(size_t id, const PatternTree &ptree)
+{
+    auto oldExpr = itemById(id);
+    auto newExpr = unrollTree(nullptr, ptree.getRootNode());
+
+    auto parent = oldExpr->parent() ? oldExpr->parent() : invisibleRootItem();
+    int pos = 0;
+    for(int i = 0; i < parent->childCount(); ++i, ++pos)
+    {
+        auto child = dynamic_cast<TreeWidgetItem*>(parent->child(i));
+        if(child && child->id() == id)
+        {
+            parent->removeChild(oldExpr);
+            break;
+        }
+    }
+
+    parent->insertChild(pos, newExpr);
+    expandItem(newExpr);
+}
+
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
 {
     TreeWidgetItem* sourceItem = mCurrentSelectedItem;

@@ -32,6 +32,10 @@ void Application::connectLayers()
     // reparenting
     connect(mMainWindow, &MainWindow::reparentingRequested, mBackendLayer, &Backend::BackendLayer::reparent);
     connect(mBackendLayer, &Backend::BackendLayer::reparented, mMainWindow, &MainWindow::reparent);
+
+    // minimization
+    connect(mMainWindow, &MainWindow::minimizationRequested, mBackendLayer, &Backend::BackendLayer::minimize);
+    connect(mBackendLayer, &Backend::BackendLayer::minimized, mMainWindow, &MainWindow::minimize);
 }
 
 int Application::exec()

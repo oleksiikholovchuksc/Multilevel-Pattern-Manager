@@ -50,7 +50,10 @@ std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryE
         structure.push_back(newItem);
     }
 
-    return std::make_shared<Model::SimpleExpression>(expr->getID(), "minimized", structure);
+    return std::make_shared<Model::SimpleExpression>(
+                expr->getID(),
+                "MIN(" + expr->getName() + ")",
+                structure);
 }
 
 }

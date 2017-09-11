@@ -42,6 +42,11 @@ void ViewWidget::reparent(size_t sourceId, size_t targetId)
     mTreeView->reparent(sourceId, targetId);
 }
 
+void ViewWidget::minimize(size_t id, const PatternTree &ptree)
+{
+    mTreeView->minimize(id, ptree);
+}
+
 void ViewWidget::handleSelectionChanged(size_t id)
 {
     if(id != mCurrentSelectedId)
@@ -49,6 +54,11 @@ void ViewWidget::handleSelectionChanged(size_t id)
         mCurrentSelectedId = id;
         emit selectedIdChanged(mCurrentSelectedId);
     }
+}
+
+void ViewWidget::handleMinimizationRequest()
+{
+    emit minimizationRequested(mCurrentSelectedId);
 }
 
 void ViewWidget::arrangeWidgets()
@@ -70,6 +80,8 @@ void ViewWidget::arrangeWidgets()
     connect(mTreeView, &TreeView::splicingRequested, this, &ViewWidget::splicingRequested);
     connect(mTreeView, &TreeView::selectedIdChanged, this, &ViewWidget::handleSelectionChanged);
     connect(mTreeView, &TreeView::reparentingRequested, this, &ViewWidget::reparentingRequested);
+
+    connect(mInspectorView, &InspectorView::minimizationRequested, this, &ViewWidget::handleMinimizationRequest);
 }
 
 }

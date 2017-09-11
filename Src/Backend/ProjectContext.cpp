@@ -3,7 +3,7 @@
 #include "Backend/PatternFactory.h"
 #include "Backend/Model/SimpleExpression.hpp"
 #include "Backend/Model/LeafNode.hpp"
-#include "Backend/Processors/PatternProcessor.hpp"
+#include "Backend/Model/BinaryExpression.h"
 #include "Backend/BackUtilsUtils.h"
 
 #include <QDebug>
@@ -131,6 +131,33 @@ void ProjectContext::reparent(size_t sourceId, size_t destinationId)
     {
         qWarning() << "It's possible to reparent only to simple expressions";
         return;
+    }
+}
+
+void ProjectContext::minimize(size_t id)
+{
+    auto expr = getExpr(id);
+
+    if(!expr)
+        return;
+
+    auto binExpr = std::dynamic_pointer_cast<Model::BinaryExpression>(expr);
+    if(!binExpr)
+    {
+        qWarning() << "Couldn't cast to binary expression on backed side during minim. operation";
+        return;
+    }
+
+    auto minimizedExpr = mFactory->getMinimized(binExpr);
+
+    for(size_t i = 0; i < mPatterns.size(); ++i)
+    {
+        if(mPatterns[i] && mPatterns[i]->getID() == id)
+        {
+            mPatterns[i] = minimizedExpr;
+            emit minimized(id, BackUtils::ptreeFromIExpression(minimizedExpr));
+            break;
+        }
     }
 }
 

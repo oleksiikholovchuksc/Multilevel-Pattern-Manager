@@ -34,6 +34,8 @@ InspectorView::InspectorView()
     , mDummyDataLabel3(new QLabel())
 {
     arrangeWidgets();
+
+    connect(mMinimizeButton, &QPushButton::clicked, this, &InspectorView::minimizationRequested);
 }
 
 void InspectorView::presentNode(const NodeUIData &data)
