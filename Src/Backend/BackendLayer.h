@@ -32,6 +32,7 @@ public slots:
     void handleSelectedIdChanged(size_t id);
     void reparent(size_t sourceId, size_t targetId);
     void minimize(size_t id);
+    void remove(size_t id);
 
 private slots:
     void init();

@@ -34,6 +34,10 @@ signals:
     void selectedIdChanged(size_t id);
     void reparentingRequested(size_t sourceId, size_t targetId);
     void minimizationRequested(size_t id);
+    void removeRequested(size_t id);
+
+private slots:
+    void handleRemoveRequest();
 
 private:
     void createToolbar();

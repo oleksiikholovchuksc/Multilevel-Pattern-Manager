@@ -161,6 +161,12 @@ void ProjectContext::minimize(size_t id)
     }
 }
 
+void ProjectContext::remove(size_t id)
+{
+    Q_UNUSED(id);
+    // NIY
+}
+
 ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)
 {
     for(const auto& expr : mPatterns)

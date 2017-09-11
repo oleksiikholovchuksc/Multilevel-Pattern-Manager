@@ -41,6 +41,11 @@ void BackendLayer::minimize(size_t id)
     mContext->minimize(id);
 }
 
+void BackendLayer::remove(size_t id)
+{
+    mContext->remove(id);
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();

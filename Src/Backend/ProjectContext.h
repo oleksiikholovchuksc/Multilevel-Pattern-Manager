@@ -44,6 +44,7 @@ public slots:
     void splice(size_t sourceId, size_t destinationId);
     void reparent(size_t sourceId, size_t destinationId);
     void minimize(size_t id);
+    void remove(size_t id);
 
 private:
     std::unique_ptr<PatternFactory> mFactory;

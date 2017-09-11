@@ -36,6 +36,9 @@ void Application::connectLayers()
     // minimization
     connect(mMainWindow, &MainWindow::minimizationRequested, mBackendLayer, &Backend::BackendLayer::minimize);
     connect(mBackendLayer, &Backend::BackendLayer::minimized, mMainWindow, &MainWindow::minimize);
+
+    // removal
+    connect(mMainWindow, &MainWindow::removeRequested, mBackendLayer, &Backend::BackendLayer::remove);
 }
 
 int Application::exec()

@@ -63,11 +63,21 @@ void MainWindow::minimize(size_t id, const PatternTree &ptree)
     mViewWidget->minimize(id, ptree);
 }
 
+void MainWindow::handleRemoveRequest()
+{
+    size_t selectedId = mViewWidget->getSelectedId();
+    if(selectedId != std::numeric_limits<size_t>::max())
+    {
+        emit removeRequested(selectedId);
+    }
+}
+
 void MainWindow::createToolbar()
 {
     MainToolbar *toolbar = new MainToolbar();
     addToolBar(Qt::TopToolBarArea, toolbar);
     connect(toolbar, &MainToolbar::addPatternRequested, this, &MainWindow::addPatternRequest);
+    connect(toolbar, &MainToolbar::removeRequested, this, &MainWindow::handleRemoveRequest);
 }
 
 void MainWindow::createStatusBar()
