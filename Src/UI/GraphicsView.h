@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 
+class QGraphicsScene;
+
 namespace MPM {
 class GraphicsView : public QGraphicsView
 {
@@ -10,6 +12,11 @@ class GraphicsView : public QGraphicsView
 
 public:
     GraphicsView();
+
+
+
+private:
+    QGraphicsScene *mScene;
 };
 }
 #endif // GRAPHICSVIEW_H
