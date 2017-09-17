@@ -48,6 +48,7 @@ void GraphicsView::minimize(size_t id, const PatternTree &tree)
 
 void GraphicsView::highlightNode(size_t id)
 {
+    Q_UNUSED(id);
 //    auto it = mNodeMap.find(id);
 //    if(it != mNodeMap.end())
 //    {
