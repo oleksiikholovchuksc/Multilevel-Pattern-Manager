@@ -25,11 +25,13 @@ size_t ViewWidget::getSelectedId() const
 void ViewWidget::addPattern(size_t parentId, const PatternTree &ptree)
 {
     mTreeView->addPattern(parentId, ptree);
+    mGraphView->addPattern(parentId, ptree);
 }
 
 void ViewWidget::splicePatterns(size_t sourceId, size_t destId, const PatternTree &ptree)
 {
     mTreeView->splicePatterns(sourceId, destId, ptree);
+    mGraphView->splicePatterns(sourceId, destId, ptree);
 }
 
 void ViewWidget::presentNode(const NodeUIData &data)

@@ -71,6 +71,9 @@ HEADERS += \
 
 mac {
     QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wold-style-cast -Werror
+
+    INCLUDEPATH += Src/3rdparty/qgv/include
+    LIBS += -L$$PWD/Src/3rdparty/qgv/bin -lQGVCore
 }
 
 RESOURCES += \
