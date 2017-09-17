@@ -25,7 +25,7 @@ public:
     void addPattern(size_t parentId, const PatternTree& ptree);
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
     void presentNode(const NodeUIData& data);
-    void reparent(size_t sourceId, size_t targetId);
+    void reparent(size_t sourceId, size_t targetId, const PatternTree& tree);
     void minimize(size_t id, const PatternTree& ptree);
 
 signals:

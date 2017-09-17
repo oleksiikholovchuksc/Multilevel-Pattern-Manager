@@ -53,9 +53,9 @@ void MainWindow::presentNode(const NodeUIData &data)
     mViewWidget->presentNode(data);
 }
 
-void MainWindow::reparent(size_t sourceId, size_t targetId)
+void MainWindow::reparent(size_t sourceId, size_t targetId, const PatternTree& tree)
 {
-    mViewWidget->reparent(sourceId, targetId);
+    mViewWidget->reparent(sourceId, targetId, tree);
 }
 
 void MainWindow::minimize(size_t id, const PatternTree &ptree)

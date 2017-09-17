@@ -125,7 +125,7 @@ void ProjectContext::reparent(size_t sourceId, size_t destinationId)
     {
         asSimple->addChild(source);
         removeTopLevelExpr(sourceId);
-        emit reparented(sourceId, destinationId);
+        emit reparented(sourceId, destinationId, BackUtils::ptreeFromIExpression(dest));
     }
     else
     {

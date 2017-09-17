@@ -23,7 +23,7 @@ signals:
     void patternAdded(size_t parentId, const PatternTree& ptree);
     void patternsSpliced(size_t sourceId, size_t destinationId, const PatternTree& splicedTree);
     void currentNodeChanged(const NodeUIData& data);
-    void reparented(size_t sourceId, size_t destId);
+    void reparented(size_t sourceId, size_t destId, const PatternTree& tree);
     void minimized(size_t id, const PatternTree& ptree);
 
 public slots:

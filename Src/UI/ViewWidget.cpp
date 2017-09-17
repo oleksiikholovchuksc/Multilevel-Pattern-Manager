@@ -37,16 +37,19 @@ void ViewWidget::splicePatterns(size_t sourceId, size_t destId, const PatternTre
 void ViewWidget::presentNode(const NodeUIData &data)
 {
     mInspectorView->presentNode(data);
+    mGraphView->highlightNode(data.id);
 }
 
-void ViewWidget::reparent(size_t sourceId, size_t targetId)
+void ViewWidget::reparent(size_t sourceId, size_t targetId, const PatternTree& tree)
 {
     mTreeView->reparent(sourceId, targetId);
+    mGraphView->reparent(sourceId, targetId, tree);
 }
 
 void ViewWidget::minimize(size_t id, const PatternTree &ptree)
 {
     mTreeView->minimize(id, ptree);
+    mGraphView->minimize(id, ptree);
 }
 
 void ViewWidget::handleSelectionChanged(size_t id)

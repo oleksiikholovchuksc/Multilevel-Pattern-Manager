@@ -31,6 +31,40 @@ void GraphicsView::splicePatterns(size_t sourceId, size_t destId, const PatternT
     addPattern(std::numeric_limits<size_t>::max(), ptree);
 }
 
+void GraphicsView::reparent(size_t sourceId, size_t destId, const PatternTree &tree)
+{
+    deleteCompByNodeId(sourceId);
+    deleteCompByNodeId(destId);
+
+    addPattern(std::numeric_limits<size_t>::max(), tree);
+}
+
+void GraphicsView::minimize(size_t id, const PatternTree &tree)
+{
+    deleteCompByNodeId(id);
+
+    addPattern(std::numeric_limits<size_t>::max(), tree);
+}
+
+void GraphicsView::highlightNode(size_t id)
+{
+//    auto it = mNodeMap.find(id);
+//    if(it != mNodeMap.end())
+//    {
+//        // color all other white
+//        for(auto item : mNodeMap)
+//        {
+//            if(item.second)
+//                item.second->setAttribute("color", "black");
+//        }
+
+//        if(it->second)
+//            it->second->setAttribute("color", "red");
+
+//        mScene->applyLayout();
+//    }
+}
+
 QGVNode *GraphicsView::unrollTree(std::shared_ptr<PatternTree::Node> node, size_t comp)
 {
     if(!node || !mScene)
@@ -72,6 +106,7 @@ void GraphicsView::deleteCompByNodeId(size_t id)
     {
         mEdgesMapComp.erase(e);
         mScene->deleteEdge(e);
+        e = nullptr;
     }
 
     std::vector<QGVNode*> nodeDeathList;
@@ -87,6 +122,7 @@ void GraphicsView::deleteCompByNodeId(size_t id)
     {
         mNodeMapComp.erase(n);
         mScene->deleteNode(n);
+        n = nullptr;
     }
 }
 }

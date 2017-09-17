@@ -18,6 +18,9 @@ public:
 
     void addPattern(size_t parentId, const PatternTree& ptree);
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
+    void reparent(size_t sourceId, size_t destId, const PatternTree& tree);
+    void minimize(size_t id, const PatternTree& tree);
+    void highlightNode(size_t id);
 
 private:
     QGVNode* unrollTree(std::shared_ptr<PatternTree::Node> node, size_t comp);
