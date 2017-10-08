@@ -1,5 +1,10 @@
 #include "PatternProcessor.hpp"
 
+#include "Backend/Model/LeafNode.hpp"
+
+#include <QString>
+#include <QRegularExpression>
+
 namespace MPM {
 namespace Processor {
 
@@ -52,8 +57,57 @@ std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryE
 
     return std::make_shared<Model::SimpleExpression>(
                 expr->getID(),
-                "MIN(" + expr->getName() + ")",
+                "Min(" + expr->getName() + ")",
                 structure);
+}
+
+static QString getNodePattern(std::shared_ptr<Model::IExpression> node)
+{
+    QString result;
+
+    if(std::shared_ptr<Model::LeafNode> asLeaf = std::dynamic_pointer_cast<Model::LeafNode>(node))
+    {
+        result += QString::fromStdString(asLeaf->getValue());
+    }
+    else if(std::shared_ptr<Model::SimpleExpression> asSimple = std::dynamic_pointer_cast<Model::SimpleExpression>(node))
+    {
+        auto structure = asSimple->getStructure();
+        for(auto item : structure)
+        {
+            result += getNodePattern(item);
+        }
+    }
+    else if(std::shared_ptr<Model::BinaryExpression> asBinary = std::dynamic_pointer_cast<Model::BinaryExpression>(node))
+    {
+        result += "(";
+        result += getNodePattern(asBinary->getOperands()[0]);
+        result += "|";
+        result += getNodePattern(asBinary->getOperands()[1]);
+        result += ")";
+    }
+
+    return result;
+}
+
+static QRegularExpression buildRegexp(std::shared_ptr<Model::IExpression> expr)
+{
+    QString patternString = "^" + getNodePattern(expr) + "$";
+    return QRegularExpression(patternString, QRegularExpression::CaseInsensitiveOption);
+}
+
+bool recognizeString(const std::vector<std::shared_ptr<Model::IExpression>> &expressions, const std::string &inputString)
+{
+    QString string = QString::fromStdString(inputString);
+    for(auto expr : expressions)
+    {
+        QRegularExpression regexp = buildRegexp(expr);
+        if(regexp.isValid() && regexp.match(string).hasMatch())
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 }

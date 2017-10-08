@@ -46,6 +46,11 @@ void BackendLayer::remove(size_t id)
     mContext->remove(id);
 }
 
+void BackendLayer::recognizeString(const QString &string)
+{
+    mContext->recognize(string);
+}
+
 void BackendLayer::init()
 {
     mContext = std::make_shared<ProjectContext>();
@@ -53,6 +58,7 @@ void BackendLayer::init()
     connect(mContext.get(), &ProjectContext::patternsSpliced, this, &BackendLayer::patternsSpliced);
     connect(mContext.get(), &ProjectContext::reparented, this, &BackendLayer::reparented);
     connect(mContext.get(), &ProjectContext::minimized, this, &BackendLayer::minimized);
+    connect(mContext.get(), &ProjectContext::recognitionDone, this, &BackendLayer::recognitionDone);
 }
 
 }

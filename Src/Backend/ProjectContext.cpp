@@ -5,7 +5,7 @@
 #include "Backend/Model/LeafNode.hpp"
 #include "Backend/Model/BinaryExpression.h"
 #include "Backend/BackUtilsUtils.h"
-
+#include "Backend/Processors/PatternProcessor.hpp"
 #include <QDebug>
 
 #include <algorithm>
@@ -165,6 +165,11 @@ void ProjectContext::remove(size_t id)
 {
     Q_UNUSED(id);
     // NIY
+}
+
+void ProjectContext::recognize(const QString &string)
+{
+    emit recognitionDone(string, Processor::recognizeString(mPatterns, string.toStdString()));
 }
 
 ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)

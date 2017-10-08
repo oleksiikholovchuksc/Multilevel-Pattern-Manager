@@ -39,6 +39,10 @@ void Application::connectLayers()
 
     // removal
     connect(mMainWindow, &MainWindow::removeRequested, mBackendLayer, &Backend::BackendLayer::remove);
+
+    // recognition
+    connect(mMainWindow, &MainWindow::recongnitionRequested, mBackendLayer, &Backend::BackendLayer::recognizeString);
+    connect(mBackendLayer, &Backend::BackendLayer::recognitionDone, mMainWindow, &MainWindow::showRecognitionResult);
 }
 
 int Application::exec()

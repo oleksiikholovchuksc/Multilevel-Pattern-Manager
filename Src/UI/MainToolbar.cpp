@@ -6,8 +6,9 @@
 namespace MPM {
 MainToolbar::MainToolbar()
     : mAddButton(new QPushButton(QIcon("://Resources/add.png"), "Add pattern", this))
-    , mRemoveButton(new QPushButton(QIcon("://Resources/minus.png"), "Remove", this))
+    , mRecognizeButton(new QPushButton("Recognize", this))
     , mDialog(new NewPatternDialog(this))
+    , mRecognitionDialog(new NewPatternDialog(this))
 {
     // conf button
     addWidget(mAddButton);
@@ -20,16 +21,31 @@ MainToolbar::MainToolbar()
             mDialog->exec();
         }
     });
-
-    // conf dialog
     connect(mDialog, &NewPatternDialog::accepted, this, &MainToolbar::requestNewPattern);
 
-    addWidget(mRemoveButton);
+    // recognize button
+    addWidget(mRecognizeButton);
+    connect(mRecognizeButton, &QPushButton::clicked,
+            [this]()
+    {
+        if(mRecognitionDialog)
+        {
+            mRecognitionDialog->clear();
+            mRecognitionDialog->exec();
+        }
+    });
+    connect(mRecognitionDialog, &NewPatternDialog::accepted, this, &MainToolbar::requestRecognition);
 }
 
 void MainToolbar::requestNewPattern()
 {
     if(mDialog)
         emit addPatternRequested(mDialog->getSequence());
+}
+
+void MainToolbar::requestRecognition()
+{
+    if(mRecognitionDialog)
+        emit recognitionRequested(mRecognitionDialog->getString());
 }
 }

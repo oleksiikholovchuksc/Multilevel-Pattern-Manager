@@ -3,6 +3,7 @@
 #include "ViewWidget.h"
 #include "MainToolbar.h"
 
+#include <QMessageBox>
 #include <QStatusBar>
 #include <QPushButton>
 #include <QToolBar>
@@ -63,6 +64,20 @@ void MainWindow::minimize(size_t id, const PatternTree &ptree)
     mViewWidget->minimize(id, ptree);
 }
 
+void MainWindow::showRecognitionResult(const QString &string, bool result)
+{
+    Q_UNUSED(string);
+
+    if(result)
+    {
+        QMessageBox::information(this, "Success", "Pattern matched", QMessageBox::Ok);
+    }
+    else
+    {
+        QMessageBox::critical(this, "Failure", "No match", QMessageBox::Ok);
+    }
+}
+
 void MainWindow::handleRemoveRequest()
 {
     size_t selectedId = mViewWidget->getSelectedId();
@@ -78,6 +93,7 @@ void MainWindow::createToolbar()
     addToolBar(Qt::TopToolBarArea, toolbar);
     connect(toolbar, &MainToolbar::addPatternRequested, this, &MainWindow::addPatternRequest);
     connect(toolbar, &MainToolbar::removeRequested, this, &MainWindow::handleRemoveRequest);
+    connect(toolbar, &MainToolbar::recognitionRequested, this, &MainWindow::recongnitionRequested);
 }
 
 void MainWindow::createStatusBar()

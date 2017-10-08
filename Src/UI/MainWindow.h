@@ -27,6 +27,7 @@ public slots:
     void presentNode(const NodeUIData& data);
     void reparent(size_t sourceId, size_t targetId, const PatternTree& tree);
     void minimize(size_t id, const PatternTree& ptree);
+    void showRecognitionResult(const QString& string, bool result);
 
 signals:
     void addPatternRequest(const QStringList& sequence);
@@ -35,6 +36,7 @@ signals:
     void reparentingRequested(size_t sourceId, size_t targetId);
     void minimizationRequested(size_t id);
     void removeRequested(size_t id);
+    void recongnitionRequested(const QString& inputString);
 
 private slots:
     void handleRemoveRequest();

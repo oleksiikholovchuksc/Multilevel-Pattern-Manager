@@ -15,6 +15,7 @@ public:
     NewPatternDialog(QWidget *parent = 0);
 
     QStringList getSequence();
+    QString getString();
     void clear();
 
 private:

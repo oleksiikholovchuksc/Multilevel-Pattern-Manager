@@ -4,6 +4,7 @@
 #include "../Model/BinaryExpression.h"
 #include "../Model/SimpleExpression.hpp"
 
+#include <vector>
 #include <memory>
 
 namespace MPM {
@@ -15,6 +16,9 @@ std::shared_ptr<Model::BinaryExpression> splice(
         std::shared_ptr<Model::IExpression> right);
 
 std::shared_ptr<Model::SimpleExpression> minimize(std::shared_ptr<Model::BinaryExpression> expr);
+
+bool recognizeString(const std::vector<std::shared_ptr<Model::IExpression>>& expressions,
+                     const std::string& inputString);
 
 }
 }

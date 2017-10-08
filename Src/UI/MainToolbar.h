@@ -18,15 +18,18 @@ public:
 
 signals:
     void addPatternRequested(const QStringList& sequence);
+    void recognitionRequested(const QString& string);
     void removeRequested();
 
 private slots:
     void requestNewPattern();
+    void requestRecognition();
 
 private:
     QPushButton *mAddButton;
-    QPushButton *mRemoveButton;
+    QPushButton *mRecognizeButton;
     NewPatternDialog *mDialog;
+    NewPatternDialog *mRecognitionDialog;
 };
 }
 

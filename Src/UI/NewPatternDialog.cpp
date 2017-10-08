@@ -40,6 +40,14 @@ QStringList NewPatternDialog::getSequence()
     return mLine->text().split(' ');
 }
 
+QString NewPatternDialog::getString()
+{
+    if(!mLine)
+        return "";
+
+    return mLine->text();
+}
+
 void NewPatternDialog::clear()
 {
     if(mLine) mLine->clear();
