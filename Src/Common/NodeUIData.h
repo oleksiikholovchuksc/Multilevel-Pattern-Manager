@@ -10,6 +10,7 @@ struct NodeUIData
     std::string name;
     size_t id = std::numeric_limits<size_t>::max();
     bool minimizable = false;
+    bool renameable = false;
 };
 
 }

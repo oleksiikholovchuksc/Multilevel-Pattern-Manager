@@ -46,6 +46,11 @@ void BackendLayer::remove(size_t id)
     mContext->remove(id);
 }
 
+void BackendLayer::renameNode(size_t id, const QString &newName)
+{
+    mContext->renameNode(id, newName);
+}
+
 void BackendLayer::recognizeString(const QString &string)
 {
     mContext->recognize(string);
@@ -59,6 +64,7 @@ void BackendLayer::init()
     connect(mContext.get(), &ProjectContext::reparented, this, &BackendLayer::reparented);
     connect(mContext.get(), &ProjectContext::minimized, this, &BackendLayer::minimized);
     connect(mContext.get(), &ProjectContext::recognitionDone, this, &BackendLayer::recognitionDone);
+    connect(mContext.get(), &ProjectContext::nodesRenamed, this, &BackendLayer::nodesRenamed);
 }
 
 }

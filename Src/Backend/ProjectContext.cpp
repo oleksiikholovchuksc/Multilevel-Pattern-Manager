@@ -69,6 +69,14 @@ void ProjectContext::addPattern(const QStringList &sequence)
     auto newExpr = mFactory->createLowLevelPattern(stringVec);
     mPatterns.push_back(newExpr);
 
+    // update names set
+    mNames.insert(newExpr->getName());
+    auto structure = newExpr->getStructure();
+    for(auto leaf : structure)
+    {
+        mNames.insert(leaf->getName());
+    }
+
     emit patternAdded(Model::IExpression::INVALID_ID, BackUtils::ptreeFromIExpression(newExpr));
 }
 
@@ -170,6 +178,67 @@ void ProjectContext::remove(size_t id)
 void ProjectContext::recognize(const QString &string)
 {
     emit recognitionDone(string, Processor::recognizeString(mPatterns, string.toStdString()));
+}
+
+void ProjectContext::renameNode(size_t id, const QString &newName)
+{
+    auto expr = getExpr(id);
+    if(!expr)
+    {
+        qWarning() << "Couldn't find node for renaming. Looked for id" << id;
+        return;
+    }
+
+    // not allow duplications
+    if(mNames.find(newName.toStdString()) != mNames.end())
+    {
+        return;
+    }
+
+    auto originNodeName = expr->getName();
+    if(originNodeName == newName.toStdString())
+        return;
+
+    std::map<size_t, std::string> renameMap;
+    for(const auto& node : mPatterns)
+    {
+        renameHelper(node, originNodeName, newName.toStdString(), renameMap);
+    }
+
+    if(!renameMap.empty())
+        emit nodesRenamed(renameMap);
+}
+
+void ProjectContext::renameHelper(ProjectContext::ExprPtr root,
+                                  const std::string &oldName,
+                                  const std::string &newName,
+                                  std::map<size_t, std::string> &renameMap)
+{
+    if(!root)
+        return;
+
+    // recursive call
+    auto operands = root->getOperands();
+    for(const auto& node : operands)
+    {
+        renameHelper(node, oldName, newName, renameMap);
+    }
+
+    if(auto asBinaryExpr = std::dynamic_pointer_cast<Model::BinaryExpression>(root))
+    {
+        renameMap[asBinaryExpr->getID()] = asBinaryExpr->getName();
+    }
+    else
+    if(auto asSimpleExpr = std::dynamic_pointer_cast<Model::SimpleExpression>(root))
+    {
+        if(asSimpleExpr->getName() == oldName)
+        {
+            mNames.erase(oldName);
+            mNames.insert(newName);
+            asSimpleExpr->setName(newName);
+            renameMap[asSimpleExpr->getID()] = newName;
+        }
+    }
 }
 
 ProjectContext::ExprPtr ProjectContext::getExpr(size_t id)

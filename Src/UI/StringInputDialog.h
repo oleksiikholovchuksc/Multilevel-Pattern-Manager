@@ -7,12 +7,12 @@ class QLineEdit;
 
 namespace MPM {
 
-class NewPatternDialog : public QDialog
+class StringInputDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    NewPatternDialog(QWidget *parent = 0);
+    StringInputDialog(QWidget *parent = 0);
 
     QStringList getSequence();
     QString getString();

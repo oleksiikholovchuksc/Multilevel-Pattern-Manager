@@ -52,6 +52,13 @@ void ViewWidget::minimize(size_t id, const PatternTree &ptree)
     mGraphView->minimize(id, ptree);
 }
 
+void ViewWidget::renameNodes(const std::map<size_t, std::string> renameMap)
+{
+    mTreeView->renameNodes(renameMap);
+    mGraphView->renameNodes(renameMap);
+    mInspectorView->renameNodes(renameMap);
+}
+
 void ViewWidget::handleSelectionChanged(size_t id)
 {
     if(id != mCurrentSelectedId)
@@ -87,6 +94,8 @@ void ViewWidget::arrangeWidgets()
     connect(mTreeView, &TreeView::reparentingRequested, this, &ViewWidget::reparentingRequested);
 
     connect(mInspectorView, &InspectorView::minimizationRequested, this, &ViewWidget::handleMinimizationRequest);
+    connect(mInspectorView, &InspectorView::renameRequested,
+            [this](const QString& newName) { emit renamingRequested(mCurrentSelectedId, newName); });
 }
 
 }

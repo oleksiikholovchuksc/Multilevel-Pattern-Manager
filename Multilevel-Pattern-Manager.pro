@@ -34,7 +34,7 @@ SOURCES += \
     Src/UI/InspectorView.cpp \
     Src/UI/MainToolbar.cpp \
     Src/Backend/ProjectContext.cpp \
-    Src/UI/NewPatternDialog.cpp \
+    Src/UI/StringInputDialog.cpp \
     Src/Backend/PatternFactory.cpp \
     Src/Utils.cpp \
     Src/Common/PatternTree.cpp \
@@ -60,7 +60,7 @@ HEADERS += \
     Src/UI/InspectorView.h \
     Src/UI/MainToolbar.h \
     Src/Backend/ProjectContext.h \
-    Src/UI/NewPatternDialog.h \
+    Src/UI/StringInputDialog.h \
     Src/Backend/PatternFactory.h \
     Src/Utils.h \
     Src/Common/PatternTree.h \

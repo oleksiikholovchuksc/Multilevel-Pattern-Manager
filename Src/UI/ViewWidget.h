@@ -27,12 +27,14 @@ public:
     void presentNode(const NodeUIData& data);
     void reparent(size_t sourceId, size_t targetId, const PatternTree& tree);
     void minimize(size_t id, const PatternTree& ptree);
+    void renameNodes(const std::map<size_t, std::string> renameMap);
 
 signals:
     void splicingRequested(size_t id1, size_t id2);
     void selectedIdChanged(size_t id);
     void reparentingRequested(size_t sourceId, size_t targetId);
     void minimizationRequested(size_t id);
+    void renamingRequested(size_t id, const QString& newName);
 
 private slots:
     void handleSelectionChanged(size_t id);

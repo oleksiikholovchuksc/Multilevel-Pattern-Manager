@@ -4,6 +4,7 @@
 #include "Common/PatternTree.h"
 #include <QObject>
 #include <memory>
+#include <set>
 
 // forw decl
 namespace MPM {
@@ -39,6 +40,7 @@ signals:
     void reparented(size_t sourceId, size_t destId, const PatternTree& tree);
     void minimized(size_t id, const PatternTree& ptree);
     void recognitionDone(const QString& string, bool result);
+    void nodesRenamed(const std::map<size_t, std::string>& renameMap);
 
 public slots:
     void addPattern(const QStringList& sequence);
@@ -47,10 +49,17 @@ public slots:
     void minimize(size_t id);
     void remove(size_t id);
     void recognize(const QString& string);
+    void renameNode(size_t id, const QString& newName);
 
 private:
+    void renameHelper(ExprPtr root,
+                      const std::string& oldName,
+                      const std::string& newName,
+                      std::map<size_t, std::string>& renameMap);
+
     std::unique_ptr<PatternFactory> mFactory;
     std::vector<ExprPtr> mPatterns;
+    std::set<std::string> mNames;
 };
 
 }

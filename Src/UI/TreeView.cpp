@@ -121,6 +121,21 @@ void TreeView::minimize(size_t id, const PatternTree &ptree)
     expandItem(newExpr);
 }
 
+void TreeView::renameNodes(const std::map<size_t, std::string> renameMap)
+{
+    for(const auto& item : renameMap)
+    {
+        auto id = item.first;
+        auto name = item.second;
+
+        auto treeItem = itemById(id);
+        if(treeItem)
+        {
+            treeItem->setText(0, QString::fromStdString(name));
+        }
+    }
+}
+
 void TreeView::dragEnterEvent(QDragEnterEvent *e)
 {
     TreeWidgetItem* sourceItem = mCurrentSelectedItem;

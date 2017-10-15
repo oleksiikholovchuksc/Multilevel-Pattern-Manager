@@ -67,7 +67,7 @@ static QString getNodePattern(std::shared_ptr<Model::IExpression> node)
 
     if(std::shared_ptr<Model::LeafNode> asLeaf = std::dynamic_pointer_cast<Model::LeafNode>(node))
     {
-        result += QString::fromStdString(asLeaf->getValue());
+        result += QString::fromStdString(asLeaf->getName());
     }
     else if(std::shared_ptr<Model::SimpleExpression> asSimple = std::dynamic_pointer_cast<Model::SimpleExpression>(node))
     {
