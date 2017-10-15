@@ -28,6 +28,7 @@ public slots:
     void reparent(size_t sourceId, size_t targetId, const PatternTree& tree);
     void minimize(size_t id, const PatternTree& ptree);
     void showRecognitionResult(const QString& string, bool result);
+    void renameNodes(const std::map<size_t, std::string> renameMap);
 
 signals:
     void addPatternRequest(const QStringList& sequence);
@@ -37,6 +38,7 @@ signals:
     void minimizationRequested(size_t id);
     void removeRequested(size_t id);
     void recongnitionRequested(const QString& inputString);
+    void renamingRequested(size_t id, const QString& newName);
 
 private slots:
     void handleRemoveRequest();

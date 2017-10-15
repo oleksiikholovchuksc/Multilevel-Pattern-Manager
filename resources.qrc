@@ -3,5 +3,6 @@
         <file>Resources/add.png</file>
         <file>Resources/minus.png</file>
         <file>Resources/minimize.png</file>
+        <file>Resources/rename.png</file>
     </qresource>
 </RCC>

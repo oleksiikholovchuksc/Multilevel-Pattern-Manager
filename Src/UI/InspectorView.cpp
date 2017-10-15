@@ -1,5 +1,7 @@
 #include "InspectorView.h"
 
+#include "StringInputDialog.h"
+
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -27,6 +29,8 @@ static void prepareFont(QLabel* label)
 namespace MPM {
 InspectorView::InspectorView()
     : mMinimizeButton(new QPushButton(QIcon("://Resources/minimize.png"), "Minimize"))
+    , mRenameButton(new QPushButton(QIcon("://Resources/rename.png"), "Rename"))
+    , mDialog(new StringInputDialog(this))
     , mNameLabel(new QLabel())
     , mIdLabel(new QLabel())
     , mDummyDataLabel1(new QLabel())
@@ -36,16 +40,31 @@ InspectorView::InspectorView()
     arrangeWidgets();
 
     connect(mMinimizeButton, &QPushButton::clicked, this, &InspectorView::minimizationRequested);
+    connect(mRenameButton, &QPushButton::clicked, [this]()
+    {
+        if(mDialog)
+        {
+            mDialog->clear();
+            mDialog->exec();
+        }
+    });
+    connect(mDialog, &StringInputDialog::accepted, [this]() { emit renameRequested(mDialog->getString()); });
 }
 
 void InspectorView::presentNode(const NodeUIData &data)
 {
     mNameLabel->setText(QString::fromStdString(data.name));
     mMinimizeButton->setEnabled(data.minimizable);
+    mRenameButton->setEnabled(data.renameable);
     mIdLabel->setText(QString::number(data.id));
     mDummyDataLabel1->setText(QString::number(getRandomValue()));
     mDummyDataLabel2->setText(QString::number(getRandomValue()));
     mDummyDataLabel3->setText(QString::number(getRandomValue()));
+}
+
+void InspectorView::renameNodes(const std::map<size_t, std::string> renameMap)
+{
+    Q_UNUSED(renameMap);
 }
 
 void InspectorView::arrangeWidgets()
@@ -59,8 +78,10 @@ void InspectorView::arrangeWidgets()
     hLayout->addWidget(mNameLabel);
     hLayout->addStretch();
     hLayout->addWidget(mMinimizeButton);
+    hLayout->addWidget(mRenameButton);
 
     mMinimizeButton->setEnabled(false);
+    mRenameButton->setEnabled(false);
 
     QGroupBox *groupBox = new QGroupBox("Node data");
     vLayout->addWidget(groupBox);

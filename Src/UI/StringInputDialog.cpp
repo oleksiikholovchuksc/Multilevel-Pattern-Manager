@@ -1,4 +1,4 @@
-#include "NewPatternDialog.h"
+#include "StringInputDialog.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -8,7 +8,7 @@
 
 namespace MPM {
 
-NewPatternDialog::NewPatternDialog(QWidget *parent)
+StringInputDialog::StringInputDialog(QWidget *parent)
     : QDialog(parent)
     , mLine(new QLineEdit())
 {
@@ -22,8 +22,8 @@ NewPatternDialog::NewPatternDialog(QWidget *parent)
 
     // bot
     QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(box, &QDialogButtonBox::accepted, this, &NewPatternDialog::accept);
-    connect(box, &QDialogButtonBox::rejected, this, &NewPatternDialog::reject);
+    connect(box, &QDialogButtonBox::accepted, this, &StringInputDialog::accept);
+    connect(box, &QDialogButtonBox::rejected, this, &StringInputDialog::reject);
 
     // lay
     QVBoxLayout *vLayout = new QVBoxLayout();
@@ -32,7 +32,7 @@ NewPatternDialog::NewPatternDialog(QWidget *parent)
     vLayout->addWidget(box);
 }
 
-QStringList NewPatternDialog::getSequence()
+QStringList StringInputDialog::getSequence()
 {
     if(!mLine)
         return {};
@@ -40,7 +40,7 @@ QStringList NewPatternDialog::getSequence()
     return mLine->text().split(' ');
 }
 
-QString NewPatternDialog::getString()
+QString StringInputDialog::getString()
 {
     if(!mLine)
         return "";
@@ -48,7 +48,7 @@ QString NewPatternDialog::getString()
     return mLine->text();
 }
 
-void NewPatternDialog::clear()
+void StringInputDialog::clear()
 {
     if(mLine) mLine->clear();
 }

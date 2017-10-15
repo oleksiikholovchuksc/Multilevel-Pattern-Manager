@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mViewWidget, &ViewWidget::selectedIdChanged, this, &MainWindow::selectedIdChanged);
     connect(mViewWidget, &ViewWidget::reparentingRequested, this, &MainWindow::reparentingRequested);
     connect(mViewWidget, &ViewWidget::minimizationRequested, this, &MainWindow::minimizationRequested);
+    connect(mViewWidget, &ViewWidget::renamingRequested, this, &MainWindow::renamingRequested);
 }
 
 void MainWindow::showStatusBarMessage(const QString &msg)
@@ -76,6 +77,11 @@ void MainWindow::showRecognitionResult(const QString &string, bool result)
     {
         QMessageBox::critical(this, "Failure", "No match", QMessageBox::Ok);
     }
+}
+
+void MainWindow::renameNodes(const std::map<size_t, std::string> renameMap)
+{
+    mViewWidget->renameNodes(renameMap);
 }
 
 void MainWindow::handleRemoveRequest()

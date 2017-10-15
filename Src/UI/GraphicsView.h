@@ -21,6 +21,7 @@ public:
     void reparent(size_t sourceId, size_t destId, const PatternTree& tree);
     void minimize(size_t id, const PatternTree& tree);
     void highlightNode(size_t id);
+    void renameNodes(const std::map<size_t, std::string> renameMap);
 
 private:
     QGVNode* unrollTree(std::shared_ptr<PatternTree::Node> node, size_t comp);

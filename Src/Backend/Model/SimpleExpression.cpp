@@ -65,5 +65,10 @@ std::string SimpleExpression::getName() const
     return mName;
 }
 
+void SimpleExpression::setName(const std::string &newName)
+{
+    mName = newName;
+}
+
 }
 }

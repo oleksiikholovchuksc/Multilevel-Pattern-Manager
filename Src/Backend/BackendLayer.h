@@ -25,6 +25,7 @@ signals:
     void currentNodeChanged(const NodeUIData& data);
     void reparented(size_t sourceId, size_t destId, const PatternTree& tree);
     void minimized(size_t id, const PatternTree& ptree);
+    void nodesRenamed(const std::map<size_t, std::string> renameMap);
 
     void recognitionDone(const QString& string, bool result);
 
@@ -35,6 +36,7 @@ public slots:
     void reparent(size_t sourceId, size_t targetId);
     void minimize(size_t id);
     void remove(size_t id);
+    void renameNode(size_t id, const QString& newName);
 
     void recognizeString(const QString& string);
 

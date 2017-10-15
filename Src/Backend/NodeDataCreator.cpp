@@ -15,6 +15,7 @@ NodeUIData createData(std::shared_ptr<Model::IExpression> expr)
         result.id = expr->getID();
         result.name = expr->getName();
         result.minimizable = (std::dynamic_pointer_cast<Model::BinaryExpression>(expr) != nullptr);
+        result.renameable = (std::dynamic_pointer_cast<Model::BinaryExpression>(expr) == nullptr);
     }
 
     return result;

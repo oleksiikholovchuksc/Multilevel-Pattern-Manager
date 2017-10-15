@@ -7,7 +7,7 @@ class QPushButton;
 
 namespace MPM {
 
-class NewPatternDialog;
+class StringInputDialog;
 
 class MainToolbar : public QToolBar
 {
@@ -28,8 +28,8 @@ private slots:
 private:
     QPushButton *mAddButton;
     QPushButton *mRecognizeButton;
-    NewPatternDialog *mDialog;
-    NewPatternDialog *mRecognitionDialog;
+    StringInputDialog *mDialog;
+    StringInputDialog *mRecognitionDialog;
 };
 }
 

@@ -49,21 +49,29 @@ void GraphicsView::minimize(size_t id, const PatternTree &tree)
 void GraphicsView::highlightNode(size_t id)
 {
     Q_UNUSED(id);
-//    auto it = mNodeMap.find(id);
-//    if(it != mNodeMap.end())
-//    {
-//        // color all other white
-//        for(auto item : mNodeMap)
-//        {
-//            if(item.second)
-//                item.second->setAttribute("color", "black");
-//        }
 
-//        if(it->second)
-//            it->second->setAttribute("color", "red");
+    // NIY
+}
 
-//        mScene->applyLayout();
-//    }
+void GraphicsView::renameNodes(const std::map<size_t, std::string> renameMap)
+{
+    for(const auto& item : renameMap)
+    {
+        auto id = item.first;
+        auto name = item.second;
+
+        auto nodeIt = mNodeMap.find(id);
+        if(nodeIt != mNodeMap.end())
+        {
+            QGVNode* graphNode = nodeIt->second;
+            if(graphNode)
+            {
+                graphNode->setLabel(QString::fromStdString(name));
+            }
+        }
+    }
+
+    mScene->applyLayout();
 }
 
 QGVNode *GraphicsView::unrollTree(std::shared_ptr<PatternTree::Node> node, size_t comp)

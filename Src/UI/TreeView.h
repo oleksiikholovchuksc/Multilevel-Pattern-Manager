@@ -19,6 +19,7 @@ public:
     void splicePatterns(size_t sourceId, size_t destId, const PatternTree& ptree);
     void reparent(size_t sourceId, size_t targetId);
     void minimize(size_t id, const PatternTree& ptree);
+    void renameNodes(const std::map<size_t, std::string> renameMap);
 
 signals:
     void splicingRequested(size_t id1, size_t id2);

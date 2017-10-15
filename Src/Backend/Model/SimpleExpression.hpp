@@ -22,8 +22,12 @@ public:
     std::shared_ptr<IExpression> clone() const override;
     std::string getName() const override;
 
-private:
+    void setName(const std::string& newName);
+
+protected:
     std::string mName;
+
+private:
     std::vector<std::shared_ptr<IExpression>> mStructure;
 };
 

@@ -13,6 +13,7 @@ Application::Application(int argc, char** argv)
     qRegisterMetaType<size_t>("size_t");
     qRegisterMetaType<PatternTree>("PatternTree");
     qRegisterMetaType<NodeUIData>("NodeUIData");
+    qRegisterMetaType<std::map<size_t,std::string>>("std::map<size_t,std::string>");
 }
 
 void Application::connectLayers()
@@ -43,6 +44,10 @@ void Application::connectLayers()
     // recognition
     connect(mMainWindow, &MainWindow::recongnitionRequested, mBackendLayer, &Backend::BackendLayer::recognizeString);
     connect(mBackendLayer, &Backend::BackendLayer::recognitionDone, mMainWindow, &MainWindow::showRecognitionResult);
+
+    // renaming
+    connect(mMainWindow, &MainWindow::renamingRequested, mBackendLayer, &Backend::BackendLayer::renameNode);
+    connect(mBackendLayer, &Backend::BackendLayer::nodesRenamed, mMainWindow, &MainWindow::renameNodes);
 }
 
 int Application::exec()
